@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { ADD_ITEM, REMOVE_ITEM, UPDATE_ITEM, BUY_ITEM } from '../utils/actions';
 
-import { useStudentContext } from '../utils/StudentContext';
+import { useStudentContext } from '../utils/ItemContext';
 
 export default function StudentList() {
   const [state, dispatch] = useStudentContext();
