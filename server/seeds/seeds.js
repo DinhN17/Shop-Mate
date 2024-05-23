@@ -6,7 +6,6 @@ db.once('open', async () => {
   try {
     await cleanDB('User', 'users');
     await cleanDB('List', 'lists');
-    await cleanDB('Item', 'items');
 
     // User Data
     const user1 = await User.create({
@@ -36,6 +35,12 @@ db.once('open', async () => {
       items: [],
     });
 
+    user1.ownedLists.push(list1._id);
+    user1.memberedLists.push(list1._id);
+    user2.memberedLists.push(list1._id);
+    
+   
+
     const list2 = await List.create({
       name: 'Shopping List',
       description: 'Weekly Shopping List',
@@ -44,25 +49,43 @@ db.once('open', async () => {
       items: [],
     });
 
+    user2.ownedLists.push(list2._id);
+    user2.memberedLists.push(list2._id);
+
+    await user1.save();
+    await user2.save();
+
     console.log('Lists seeded!');
 
     // Create items
-    const item1 = await Item.create({
-      name: 'Milk',
-      description: '1 gallon of milk',
-      addedBy: user1._id,
-      boughtBy: null,
-    });
+    // const item1 = await Item.create({
+    //   name: 'Milk',
+    //   description: '1 gallon of milk',
+    //   addedBy: user1._id,
+    //   boughtBy: null,
+    // });
 
-    const item2 = await Item.create({
-      name: 'Bread',
-      description: 'Whole wheat bread',
-      addedBy: user2._id,
-      boughtBy: user1._id,
-    });
+    // const item2 = await Item.create({
+    //   name: 'Bread',
+    //   description: 'Whole wheat bread',
+    //   addedBy: user2._id,
+    //   boughtBy: user1._id,
+    // });
 
     // Add items to list
-    list1.items.push(item1._id, item2._id);
+    list1.items.push(
+      {
+        name: 'Milk',
+        description: '1 gallon of milk',
+        addedBy: user1._id,
+        boughtBy: null,
+      },
+      {
+        name: 'Bread',
+        description: 'Whole wheat bread',
+        addedBy: user2._id,
+        boughtBy: user1._id,
+      });
     await list1.save();
 
     console.log('Items seeded!');
