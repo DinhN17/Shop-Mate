@@ -1,6 +1,6 @@
-import { qpl } from '@apollo/client';
+import { gql } from '@apollo/client';
 
-export const GET_LIST_BY_USER = qpl`
+export const GET_LIST_BY_USER = gql`
     query getListsByUser($username: String!) {
         listsByUser(username: $username) {
             ownedLists
@@ -9,7 +9,7 @@ export const GET_LIST_BY_USER = qpl`
     }
 `
 
-export const GET_LISTS = qpl`
+export const GET_LISTS = gql`
     query getLists {
         lists {
             _id
@@ -20,7 +20,7 @@ export const GET_LISTS = qpl`
     }
 `
 
-export const GET_LIST = qpl`
+export const GET_LIST = gql`
     query getList($id: ID!) {
         list(id: $id) {
             _id
@@ -33,7 +33,7 @@ export const GET_LIST = qpl`
     }
 `
 
-export const GET_LIST_VERSION = qpl`
+export const GET_LIST_VERSION = gql`
     query getListVersion($id: ID!) {
         list(id: $id) {
             _id
