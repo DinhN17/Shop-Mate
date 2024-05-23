@@ -1,6 +1,7 @@
 // import { useState } from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
+import React from 'react';
 import './App.css'
 
 import {
@@ -11,6 +12,7 @@ import {
 } from '@apollo/client';
 
 import { setContext } from '@apollo/client/link/context';
+import { ChakraProvider } from '@chakra-ui/react';
 
 import { Outlet } from 'react-router-dom';
 import Header from './components/Header.jsx';
@@ -30,11 +32,15 @@ function App() {
   // const [count, setCount] = useState(0)
 
   return (
-    <ApolloProvider client={client}>
-      <Header />
-      <Outlet />
-      <Footer />
-    </ApolloProvider>
+    <React.StrictMode>
+      <ChakraProvider>  
+        <ApolloProvider client={client}>
+          <Header />
+          <Outlet />
+          <Footer />
+        </ApolloProvider>
+      </ChakraProvider>
+    </React.StrictMode>
   )
 }
 
