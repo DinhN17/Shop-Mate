@@ -1,5 +1,5 @@
 const db = require('../config/connection');
-const { User, List, Item } = require('../models');
+const { User, List } = require('../models');
 const cleanDB = require('./cleanDB');
 
 db.once('open', async () => {
@@ -31,7 +31,7 @@ db.once('open', async () => {
       name: 'Grocery List',
       description: 'Monthly Shopping List',
       owner: user1._id,
-      members: [user1._id, user2._id],
+      // members: [user1._id, user2._id],
       items: [],
     });
 
@@ -45,7 +45,7 @@ db.once('open', async () => {
       name: 'Shopping List',
       description: 'Weekly Shopping List',
       owner: user2._id,
-      members: [user2._id],
+      // members: [user2._id],
       items: [],
     });
 
