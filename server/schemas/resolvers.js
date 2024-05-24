@@ -11,6 +11,13 @@ const resolvers = {
             return await User.findOne({ username }).populate('ownedLists').populate('memberedLists');
         },
 
+        listsByUser: async (parent, { username }) => {
+            const data = await User.findOne({ username }).populate('ownedLists').populate('memberedLists');
+            
+            // console.log(lists);
+            return data.ownedLists.concat(data.memberedLists);
+        },
+
         listsOwnedByUser: async (parent, { username }) => {
             const lists = await User.findOne({ username }).populate('ownedLists');
             // console.log(lists.ownedLists);

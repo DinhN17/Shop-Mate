@@ -11,9 +11,8 @@ const listSchema = new Schema({
     trim: true,
   },
   owner: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
+    type: String,
+    trim: true,
   },
   // members: [{
   //   type: Schema.Types.ObjectId,
@@ -32,14 +31,12 @@ const listSchema = new Schema({
         trim: true,
       },
       addedBy: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true,
+        type: String,
+        trim: true,
       },
       boughtBy: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        default: null,
+        type: String,
+        trim: true,
       },
     },
   ],

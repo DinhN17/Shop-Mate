@@ -14,9 +14,10 @@ const typeDefs = `
         _id: ID
         name: String
         description: String
-        owner: User
+        owner: String
         items: [Item]
-        createdAt: String 
+        createdAt: String
+        updatedAt: String
         version: Int
     }
 
@@ -24,9 +25,8 @@ const typeDefs = `
         _id: ID
         name: String
         description: String
-        addedBy: User
-        createdAt: String
-        boughtBy: User
+        addedBy: String
+        boughtBy: String
     }
 
     type Auth {
@@ -37,6 +37,7 @@ const typeDefs = `
     type Query {
         users: [User]
         user(username: String!): User
+        listsByUser(username: String!): [List]
         listsOwnedByUser(username: String!): [List]
         listsMemberedByUser(username: String!): [List]
         lists: [List]

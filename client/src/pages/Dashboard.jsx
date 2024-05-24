@@ -6,12 +6,14 @@ import { GET_LISTS, GET_LIST_BY_USER } from "../utils/queries";
 
 const Dashboard = () => {
     const { loading, error, data } = useQuery(GET_LIST_BY_USER, {
-        variables: { user: localStorage.getItem('username') }
+        variables: { username: "pamwashington" }
     });
-    const ownedlists = data?.ownedlists || [];
-    const memberlists = data?.memberlists || [];
+    console.log(data);
+    // const memberlists = data? || [];
 
-    const lists = [...ownedlists, ...memberlists];
+    const lists = data?.listsMemberedByUser || [];
+
+    console.log(lists);
 
     return (
         <main>

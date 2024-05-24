@@ -1,4 +1,5 @@
-export default function ShopList({lists}) {
+import { Link } from 'react-router-dom';
+export default function ShoppingList({lists}) {
   if (!lists.length) {
     return <h3>No shopping list Yet</h3>;
   }
@@ -8,17 +9,13 @@ export default function ShopList({lists}) {
       {lists &&
         lists.map((list) => (
           <div key={list._id} className="card mb-3">
-            <h4 className="card-header bg-primary text-light p-2 m-0">
-              {list.owner} <br />
-              <span style={{ fontSize: '1rem' }}>
-                had this list on {list.createdAt}
-              </span>
-            </h4>
-            <div className="card-body bg-light p-2">
-              <p>{list.name}</p>
-            </div>
+            <Link to={`/lists/${list._id}`}>
+              Name: {list.name}.
+            </Link>
+            <h4>Created by: {list.owner}</h4>
+            <h4>Description: {list.description}</h4>
           </div>
         ))}
     </div>
   );
-};
+}
