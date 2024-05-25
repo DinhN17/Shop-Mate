@@ -25,6 +25,7 @@ export const GET_LISTS = gql`
     }
 `
 
+// get a signle list
 export const GET_LIST = gql`
     query getList($id: ID!) {
         list(listId: $id) {
@@ -39,6 +40,15 @@ export const GET_LIST = gql`
                 _id
             }
             description
+        }
+    }
+`
+
+// get updatedAt of a list with listId
+export const GET_LIST_UPDATED_AT = gql`
+    query getListUpdatedAt($id: ID!) {
+        list(listId: $id) {
+            updatedAt
         }
     }
 `
