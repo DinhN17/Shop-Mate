@@ -1,5 +1,5 @@
 const db = require('../config/connection');
-const { User, List, Item } = require('../models');
+const { User, List } = require('../models');
 const cleanDB = require('./cleanDB');
 
 db.once('open', async () => {
@@ -30,8 +30,8 @@ db.once('open', async () => {
     const list1 = await List.create({
       name: 'Grocery List',
       description: 'Monthly Shopping List',
-      owner: user1._id,
-      members: [user1._id, user2._id],
+      owner: user1.username,
+      // members: [user1._id, user2._id],
       items: [],
     });
 
@@ -44,8 +44,8 @@ db.once('open', async () => {
     const list2 = await List.create({
       name: 'Shopping List',
       description: 'Weekly Shopping List',
-      owner: user2._id,
-      members: [user2._id],
+      owner: user2.username,
+      // members: [user2._id],
       items: [],
     });
 
@@ -77,14 +77,14 @@ db.once('open', async () => {
       {
         name: 'Milk',
         description: '1 gallon of milk',
-        addedBy: user1._id,
+        addedBy: user1.username,
         boughtBy: null,
       },
       {
         name: 'Bread',
         description: 'Whole wheat bread',
-        addedBy: user2._id,
-        boughtBy: user1._id,
+        addedBy: user2.username,
+        boughtBy: user1.username,
       });
     await list1.save();
 

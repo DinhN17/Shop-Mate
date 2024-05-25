@@ -9,49 +9,54 @@ const typeDefs = `
         ownedLists: [List]
         memberedLists: [List]
     }
+
     type List {
         _id: ID
         name: String
         description: String
-        owner: User
-        members: [User]
+        owner: String
         items: [Item]
-        createdAt: String 
+        createdAt: String
         updatedAt: String
         version: Int
-        concurrentlyViewing: Int
     }
+
     type Item {
         _id: ID
         name: String
         description: String
-        addedBy: User
-        createdAt: String
-        updatedAt: String
-        boughtBy: User
+        addedBy: String
+        boughtBy: String
+    }
+
+    type Auth {
+        token: ID!
+        user: User
     }
 
     type Query {
         users: [User]
-        user: User
+        user(username: String!): User
+        listsByUser(username: String!): [List]
+        listsOwnedByUser(username: String!): [List]
+        listsMemberedByUser(username: String!): [List]
         lists: [List]
-        list(_id: ID!): List   
-        items: [Item]
-        item(_id: ID!): Item
+        list(listId: ID!): List
+        me: User
+    }
+
+    type Mutation { 
+        createUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
+        login(email: String!, password: String!): Auth
     }
 `;
-//     type Mutation { 
-//         createUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
-//         login(email: String!, password: String!): Auth
 
-//         createList(name: String!, description: String, owner: User, members: [User]): List
-//         removeList(listId: ID!): List
-//         editList(listId: ID!, name: String!, description: String, members: [User]): List
+// createList(name: String!, description: String, owner: User): List
+// removeList(listId: ID!, owner: User): List
+// editList(listId: ID!, name: String!, description: String): List
 
-//         addItemToList:(listId: ID!, name: String!, addedBy: User!, description: String ): List
-//         removeItem(listId: ID!, itemId: ID!): List
-//         editItem(listId: ID!, itemId: ID!, name: String, description: String): Item 
-//     }
-// `;
-
+// addItemToList:(listId: ID!, name: String!, addedBy: User!, description: String ): List
+// removeItem(listId: ID!, itemId: ID!): List
+// editItem(listId: ID!, itemId: ID!, name: String, description: String): Item
+// buyItem(listId: ID!, itemId: ID!, boughtBy: User): List
 module.exports = typeDefs;

@@ -33,11 +33,11 @@ const userSchema = new Schema({
         minlength: 8,
     },
     ownedLists: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'List',
     }],
     memberedLists: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'List',
     }],
 }, {
@@ -49,7 +49,7 @@ userSchema.pre('save', async function (next) {
     if (this.isNew || this.isModified('password')) {
         const saltRounds = 10;
         this.password = await bcrypt.hash(this.password, saltRounds);
-    }
+    };
     next();
 });
 

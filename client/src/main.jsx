@@ -10,6 +10,7 @@ import Dashboard from './pages/Dashboard.jsx';
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
 import Donation from './pages/Donation.jsx';
+import SharedList from './pages/SharedList.jsx';
 
 
 const router = createBrowserRouter([
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard',
         element: <Dashboard />,
+      },
+      {
+        path: '/lists/:listId',
+        element: <SharedList />,
       },
       {
         path: '/login',
