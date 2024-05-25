@@ -27,13 +27,18 @@ export const GET_LISTS = gql`
 
 export const GET_LIST = gql`
     query getList($id: ID!) {
-        list(id: $id) {
-            _id
+        list(listId: $id) {
             name
-            description
             owner
-            members
-            items
+            updatedAt
+            items {
+                name
+                description
+                boughtBy
+                addedBy
+                _id
+            }
+            description
         }
     }
 `

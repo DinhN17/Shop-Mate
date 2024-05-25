@@ -28,7 +28,7 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: '/lists/:id',
+        path: '/lists/:listId',
         element: <SharedList />,
       },
       {
