@@ -60,12 +60,23 @@ const resolvers = {
                 throw AuthenticationError; 
             }
 
-        },
-    // //     createList: async (parent, { name, description, owner, members }) => {
-    // //         const list = await List.create({name, description, owner, members});
+            const correctPw = await user.isCorrectPassword(password);
 
-    // //         return list; 
-    // //     },
+            if (!correctPw) {
+                throw AuthenticationError;
+              }
+        
+              const token = signToken(user);
+        
+              return { token, user };
+        },
+    //    createList: async (parent, { name, description, owner, members}) => {
+    //        if (context.user) { 
+    //         const list = await List.create({name, description, owner, members});
+    //         return list; 
+    //        }
+            
+    //     },
     // //     removeList: async (parent, { listId }) => {
     // //         return List.findOneAndDelete({ _id: listId });
     // //     },
