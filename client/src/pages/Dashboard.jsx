@@ -8,12 +8,12 @@ const Dashboard = () => {
     const { loading, error, data } = useQuery(GET_LIST_BY_USER, {
         variables: { username: "pamwashington" }
     });
-    console.log(data);
+    // console.log(data);
     // const memberlists = data? || [];
 
     const lists = data?.listsMemberedByUser || [];
 
-    console.log(lists);
+    // console.log(lists);
 
     return (
         <main>
