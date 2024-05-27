@@ -40,7 +40,7 @@ const resolvers = {
 
         // query me: get information of the logged in user
         me: async (parent, args, context) => {
-            console.log("context", context.user);
+            // console.log("context", context.user);
             
             if (context.user) {
                 return await User.findOne({ _id: context.user._id }).populate('ownedLists').populate('memberedLists');

@@ -26,3 +26,14 @@ export const CREATE_USER = gql`
        }
     }
 `;
+
+export const ADD_LIST = gql`
+    mutation addList($name: String!, $description: String!, $owner: String!) {
+        addList(name: $name, description: $description, owner: $owner) {
+            _id
+            name
+            description
+            owner
+        }
+    }
+`;
