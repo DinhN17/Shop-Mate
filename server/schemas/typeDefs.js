@@ -48,7 +48,7 @@ const typeDefs = `
     type Mutation { 
         createUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
-       
+        addList(name: String!, description: String!): List       
     }
 `;
 //  createList(name: String!, description: String, owner: User, members:[String]): List

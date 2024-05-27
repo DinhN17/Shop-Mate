@@ -8,7 +8,7 @@ import Auth from '../utils/auth';
 
 
 const ShoppingListForm = ({ userId }) => {
-    const [formState, setFormState] = useState({ name: '', description: '', owner: userId });
+    const [formState, setFormState] = useState({ name: '', description: '' });
 
     const [addList, { error }] = useMutation(ADD_LIST);
 

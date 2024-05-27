@@ -16,11 +16,15 @@ const Dashboard = () => {
 
     const lists = data?.me.memberedLists || [];
 
-    // console.log(lists);
+    console.log(lists);
 
     if (!Auth.loggedIn()) {
         window.location.assign("/login");
     }
+
+    if (loading) {
+        return <div>Loading...</div>;
+    };
 
     return (
         <main>
@@ -29,14 +33,10 @@ const Dashboard = () => {
                     <ShoppingListForm userId={data.me._id} />
                 </div>
                 <div className="col-12 col-md-8 mb-3">
-                {loading ? (
-                    <div>Loading...</div>
-                ) : (
                     <ShoppingList
                     lists={lists}
                     title="Your current shopping lists"
                     />
-                )}
                 </div>
             </div>
         </main>

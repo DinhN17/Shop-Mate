@@ -1,5 +1,6 @@
 const { User, List } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
+const mongoose = require('mongoose');
 
 const resolvers = {
     Query: {
@@ -73,13 +74,38 @@ const resolvers = {
         
               return { token, user };
         },
-    //    createList: async (parent, { name, description, owner, members}) => {
-    //        if (context.user) { 
-    //         const list = await List.create({name, description, owner, members});
-    //         return list; 
-    //        }
+        addList: async (parent, { name, description}, context) => {
+
+            if (context.user.username) { 
+
+                const owner = context.user.username;
+                const list = await List.create({name, description, owner});
+                console.log(list);
+                // update new list to user information
+                if (!list) {
+                    throw new Error("list failed to create");
+                };
+                const listId = new mongoose.mongo.ObjectId(list._id);
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { 
+                        $addToSet: { 
+                            ownedLists: listId,
+                            memberedLists: listId 
+                        }
+                    },
+                    { new: true }
+                );
+
+                console.log(updatedUser);
+
+                if (!updatedUser) {
+                    throw new Error("user not found");
+                };
+                return list; 
+            }
             
-    //     },
+        },
     // //     removeList: async (parent, { listId }) => {
     // //         return List.findOneAndDelete({ _id: listId });
     // //     },
