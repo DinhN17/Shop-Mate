@@ -2,7 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Flex, Box, HStack, Button, useColorModeValue } from '@chakra-ui/react';
 
+import Auth from '../utils/auth';
+
 export default function Header() {
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
+  
   const bg = useColorModeValue('gray.100', 'gray.900');
   const color = useColorModeValue('black', 'white');
 
@@ -21,15 +28,25 @@ export default function Header() {
           <Link to="/dashboard">
             <Button variant="ghost" color={color}>Dashboard</Button>
           </Link>
+          <Link to="/donation">
+            <Button variant="ghost" color={color}>Donation</Button>
+          </Link>
+          {Auth.loggedIn () ? (
+            <>
+            <Link to="/">
+            <Button variant="ghost" color={color} onClick={logout}>Logout</Button>
+            </Link>
+            </>
+          ) : (
+            <>
           <Link to="/login">
             <Button variant="ghost" color={color}>Login</Button>
           </Link>
           <Link to="/signup">
             <Button variant="ghost" color={color}>Sign Up</Button>
           </Link>
-          <Link to="/donation">
-            <Button variant="ghost" color={color}>Donation</Button>
-          </Link>
+          </>
+          )};
         </HStack>
       </Flex>
     </Box>
