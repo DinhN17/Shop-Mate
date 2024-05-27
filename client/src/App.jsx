@@ -21,22 +21,35 @@ const httpLink = createHttpLink({
   uri: '/graphql',
 });
 
-// not implement auth yet
+// Construct request middleware that will attach the JWT token to every request as an `authorization` header
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('id_token');
+  console.log(token);
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+console.log(authLink);
+
 const client = new ApolloClient({
-  link: httpLink,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
 function App() {
-  // const [count, setCount] = useState(0)
-
   return (
-        <ApolloProvider client={client}>
-          <Header />
-          <Outlet />
-          <Footer />
-        </ApolloProvider>
+    <ApolloProvider client={client}>
+      <Header />
+      <Outlet />
+      <Footer />
+    </ApolloProvider>
   )
 }
 
-export default App
+export default App;

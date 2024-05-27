@@ -2,18 +2,20 @@ import { useQuery } from "@apollo/client";
 
 import ShoppingList from "../components/ShoppingList";
 
-import { GET_LISTS, GET_LIST_BY_USER } from "../utils/queries";
+import { GET_LISTS_BY_ME } from "../utils/queries";
+
+import Auth from "../utils/auth";
 
 const Dashboard = () => {
-    const { loading, error, data } = useQuery(GET_LIST_BY_USER, {
-        variables: { username: "pamwashington" }
-    });
-    // console.log(data);
+
+    console.log(Auth.loggedIn());
+    const { loading, error, data } = useQuery(GET_LISTS_BY_ME);
+    console.log(data);
     // const memberlists = data? || [];
 
-    const lists = data?.listsMemberedByUser || [];
+    const lists = data?.me.memberedLists || [];
 
-    // console.log(lists);
+    console.log(lists);
 
     return (
         <main>
