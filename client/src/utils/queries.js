@@ -1,15 +1,23 @@
 import { gql } from '@apollo/client';
 
-export const GET_LIST_BY_USER = gql`
-    query getListsByUser($username: String!) {
-        listsMemberedByUser(username: $username) {
+export const GET_LISTS_BY_ME = gql`
+    query me {
+        me {
             _id
-            name
-            owner
-            description
-            createdAt
-            updatedAt
-            version
+            username
+            email
+            ownedLists {
+                _id
+                name
+                owner
+                description
+            }
+            memberedLists {
+                _id
+                name
+                owner
+                description
+            }
         }
     }
 `
