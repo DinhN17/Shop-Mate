@@ -31,11 +31,15 @@ function App() {
   // const [count, setCount] = useState(0)
 
   return (
-        <ApolloProvider client={client}>
-          <Header />
+    <ApolloProvider client={client}>
+      <>
+        <Header />
+        <main>
           <Outlet />
-          <Footer />
-        </ApolloProvider>
+        </main>
+        <Footer />
+      </>
+    </ApolloProvider>
   )
 }
 

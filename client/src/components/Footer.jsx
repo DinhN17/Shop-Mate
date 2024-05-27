@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Link, Icon } from '@chakra-ui/react';
+import { Box, Flex, Link, Icon, VStack, Text } from '@chakra-ui/react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 const Footer = () => {
@@ -9,22 +9,22 @@ const Footer = () => {
   return (
     <footer>
       <Flex
+        direction="column"
         align="center"
-        justify="space-between"
         paddingY={4}
         paddingX={8}
         bg={bg}
         color={color}
       >
-        <Box>&copy; 2024 ShopMATE</Box>
-        <Box>
-          <Link href="https://github.com" isExternal marginRight={4}>
-            <Icon as={FaGithub} fontSize="xl" />
+        <Flex mb={2}>
+          <Link href="https://github.com" isExternal mx={2}>
+            <Icon as={FaGithub} fontSize="2xl" />
           </Link>
-          <Link href="https://linkedin.com" isExternal>
-            <Icon as={FaLinkedin} fontSize="xl" />
+          <Link href="https://linkedin.com" isExternal mx={2}>
+            <Icon as={FaLinkedin} fontSize="2xl" />
           </Link>
-        </Box>
+        </Flex>
+        <Text>&copy; 2024 ShopMate!</Text>
       </Flex>
     </footer>
   );

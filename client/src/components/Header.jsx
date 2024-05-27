@@ -1,20 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Flex, Box, HStack, Button, useColorModeValue } from '@chakra-ui/react';
+import { Flex, Box, HStack, Button, Image } from '@chakra-ui/react';
+
 
 export default function Header() {
-  const bg = useColorModeValue('gray.100', 'gray.900');
-  const color = useColorModeValue('black', 'white');
+  const bg = 'gray.800';
+  const color = 'white';
 
   return (
     <Box bg={bg} px={4}>
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-        <Box fontSize="2xl" fontWeight="bold">Shop Mate</Box>
-        <HStack
-          as={'nav'}
-          spacing={4}
-          alignItems={'center'}
-        >
+        <HStack spacing={2} alignItems="center">
+          <Image
+            src="../../public/wishlist.png"
+            alt="ShopMate Icon"
+            boxSize="40px"
+          />
+          <Box fontSize="2xl" fontWeight="bold" color={color}>ShopMate!</Box>
+        </HStack>
+        <HStack as={'nav'} spacing={4} alignItems={'center'}>
           <Link to="/">
             <Button variant="ghost" color={color}>Home</Button>
           </Link>
