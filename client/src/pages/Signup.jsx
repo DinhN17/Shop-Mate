@@ -59,7 +59,7 @@ const Signup = () => {
                             <Input
                             size = "md"
                             placeholder="First Name"
-                            name = "firstname"
+                            name = "firstName"
                             type = "text"
                             value = {formState.firstName}
                             onChange={handleChange}
@@ -67,7 +67,7 @@ const Signup = () => {
                             <Input
                             size = "md"
                             placeholder="Last Name"
-                            name = "lastname"
+                            name = "lastName"
                             type = "text"
                             value = {formState.lastName}
                             onChange={handleChange}
@@ -77,7 +77,7 @@ const Signup = () => {
                             placeholder=" Your username"
                             name = "username"
                             type = "text"
-                            value = {formState.username}
+                            value = {formState.name}
                             onChange={handleChange}
                             />
                             <Input
@@ -120,14 +120,3 @@ const Signup = () => {
     );
 };
 export default Signup;
-
-
-// const Signup = () => {
-//     return (
-//         <div>
-//             <h1>Donation</h1>
-//         </div>
-//     )
-// };
-
-// export default Signup;

@@ -3,9 +3,18 @@ import { Link } from 'react-router-dom';
 import { Flex, Box, HStack, Button, Image } from '@chakra-ui/react';
 
 
+import Auth from '../utils/auth';
+
 export default function Header() {
+
   const bg = 'gray.800';
   const color = 'white';
+
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
+  
 
   return (
     <Box bg={bg} px={4}>
@@ -25,15 +34,25 @@ export default function Header() {
           <Link to="/dashboard">
             <Button variant="ghost" color={color}>Dashboard</Button>
           </Link>
+          <Link to="/donation">
+            <Button variant="ghost" color={color}>Donation</Button>
+          </Link>
+          {Auth.loggedIn () ? (
+            <>
+            <Link to="/">
+            <Button variant="ghost" color={color} onClick={logout}>Logout</Button>
+            </Link>
+            </>
+          ) : (
+            <>
           <Link to="/login">
             <Button variant="ghost" color={color}>Login</Button>
           </Link>
           <Link to="/signup">
             <Button variant="ghost" color={color}>Sign Up</Button>
           </Link>
-          <Link to="/donation">
-            <Button variant="ghost" color={color}>Donation</Button>
-          </Link>
+          </>
+          )};
         </HStack>
       </Flex>
     </Box>
