@@ -2,15 +2,23 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
-import { ADD_LIST } from '../utils/mutations';
+import { ADD_LIST  } from '../utils/mutations';
+import { GET_LISTS_BY_ME } from '../utils/queries';
 
 import Auth from '../utils/auth';
 
 
-const ShoppingListForm = ({ userId }) => {
+const ShoppingListForm = () => {
     const [formState, setFormState] = useState({ name: '', description: '' });
 
-    const [addList, { error }] = useMutation(ADD_LIST);
+    const [addList, { error }] = useMutation(
+        ADD_LIST, {
+            refetchQueries: [
+                GET_LISTS_BY_ME,
+                'lists'
+            ]
+        }
+    );
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();

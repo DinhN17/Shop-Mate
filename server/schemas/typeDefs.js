@@ -42,7 +42,7 @@ const typeDefs = `
         listsMemberedByUser(username: String!): [List]
         lists: [List]
         list(listId: ID!): List
-        me: User
+        me: [List]
     }
 
     type Mutation { 

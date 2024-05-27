@@ -32,8 +32,8 @@ export const ADD_LIST = gql`
       addList(name: $name, description: $description) {
           _id
           name
-          description
           owner
+          description
       }
   }
 `;

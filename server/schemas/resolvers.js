@@ -44,7 +44,8 @@ const resolvers = {
             // console.log("context", context.user);
             
             if (context.user) {
-                return await User.findOne({ _id: context.user._id }).populate('ownedLists').populate('memberedLists');
+                const lists = await User.findOne({ _id: context.user._id }).populate('memberedLists');
+                return lists;
             }
             throw new AuthenticationError('You need to be logged in!');
         }
@@ -74,7 +75,7 @@ const resolvers = {
         
               return { token, user };
         },
-        addList: async (parent, { name, description}, context) => {
+        addList: async (parent, { name, description }, context) => {
 
             if (context.user.username) { 
 

@@ -14,7 +14,7 @@ const Dashboard = () => {
     // console.log(data);
     // const memberlists = data? || [];
 
-    const lists = data?.me.memberedLists || [];
+    const lists = data?.lists || [];
 
     console.log(lists);
 
@@ -30,7 +30,7 @@ const Dashboard = () => {
         <main>
             <div className="flex-row justify-center">
                 <div>
-                    <ShoppingListForm userId={data.me._id} />
+                    <ShoppingListForm />
                 </div>
                 <div className="col-12 col-md-8 mb-3">
                     <ShoppingList
