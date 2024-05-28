@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
 import { REMOVE_ITEM, EDIT_ITEM, BUY_ITEM } from '../utils/mutations';
-import { QUERY_ME } from '../utils/queries';
+import { GET_LISTS_BY_ME } from '../utils/queries';
 
 
-const ItemList = ({ items, listID, isLoggedInUser = false }) => {
+const ItemsList = ({ items, listId, isLoggedInUser = false }) => {
     const [removeItem] = useMutation(REMOVE_ITEM, {
-        refetchQueries: [{ query: QUERY_ME }]
+        refetchQueries: [{ query: GET_LISTS_BY_ME }]
       });
       const [editItem] = useMutation(EDIT_ITEM, {
-        refetchQueries: [{ query: QUERY_ME }]
+        refetchQueries: [{ query: GET_LISTS_BY_ME }]
       });
       const [buyItem] = useMutation(BUY_ITEM, {
-        refetchQueries: [{ query: QUERY_ME }]
+        refetchQueries: [{ query: GET_LISTS_BY_ME }]
       });
 
   // Handler function for removing an item
