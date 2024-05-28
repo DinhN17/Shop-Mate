@@ -2,11 +2,14 @@ import { gql } from '@apollo/client';
 
 export const GET_LISTS_BY_ME = gql`
     query me {
-        lists {
+        me {
             _id
-            name
-            description
-            owner
+            memberedLists {
+                _id
+                name
+                description
+                owner
+            }
         }
     }
 `

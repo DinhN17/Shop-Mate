@@ -27,10 +27,7 @@ module.exports = {
           return req;
         }
         
-        console.log("try function not operating");
-
         try {
-          console.log("this is the error")
           const { data } = jwt.verify(token, secret, { maxAge: expiration });
           // console.log("authenticatedPerson", data);
           req.user = data;

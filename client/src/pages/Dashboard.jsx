@@ -15,7 +15,7 @@ const Dashboard = () => {
     // console.log(data);
     // const memberlists = data? || [];
 
-    const lists = data?.lists || [];
+    const lists = data?.me.memberedLists || [];
 
     console.log(lists);
 

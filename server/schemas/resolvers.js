@@ -48,8 +48,8 @@ const resolvers = {
             // console.log("context", context.user);
             
             if (context.user) {
-                const lists = await User.findOne({ _id: context.user._id }).populate('memberedLists');
-                return lists;
+                const user = await User.findOne({ _id: context.user._id }).populate('memberedLists');
+                return user;
             }
             throw new AuthenticationError('You need to be logged in!');
         }
