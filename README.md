@@ -37,9 +37,9 @@ You can access a deployed version of this application [here]() - DEPLOYED VERSIO
  
 This group project has been completed as a part of the Adelaide University Web Development bootcamp. Three members in total collaborated to create this applicaiton including:
 
-- [Adelle Ocampo] (https://github.com/adellemaeocampo)
-- [Dinh Nguyen] (https://github.com/DinhN17)
-- [Samantha Samaura] (https://github.com/samanthasamarua)
+- [Adelle Ocampo](https://github.com/adellemaeocampo)
+- [Dinh Nguyen](https://github.com/DinhN17)
+- [Samantha Samaura](https://github.com/samanthasamarua)
 
 
 
