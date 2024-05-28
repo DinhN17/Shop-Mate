@@ -1,11 +1,12 @@
 import { useQuery } from "@apollo/client";
+import { Box, Container, SimpleGrid, Image, Text, Button, Link, Flex } from '@chakra-ui/react';
 
 import ShoppingList from "../components/ShoppingList";
 
 import { GET_LISTS_BY_ME } from "../utils/queries";
 
 import Auth from "../utils/auth";
-import ShoppingListForm from "../components/ShoppingListForm";
+import AddShoppingListForm from "../components/AddShoppingListForm";
 
 const Dashboard = () => {
 
@@ -28,17 +29,17 @@ const Dashboard = () => {
 
     return (
         <main>
-            <div className="flex-row justify-center">
+            <Box bg="gray.50" p={4} borderRadius="md" textAlign="center">
                 <div>
-                    <ShoppingListForm />
+                    <AddShoppingListForm />
                 </div>
-                <div className="col-12 col-md-8 mb-3">
+                <Box bg="gray.50" p={4} borderRadius="md" textAlign="center">
                     <ShoppingList
                     lists={lists}
                     title="Your current shopping lists"
                     />
-                </div>
-            </div>
+                </Box>
+            </Box>
         </main>
     )
 };

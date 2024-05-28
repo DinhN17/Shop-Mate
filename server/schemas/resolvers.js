@@ -107,6 +107,36 @@ const resolvers = {
             }
             
         },
+
+        deleteList: async (parent, { listId }, context) => {
+            if (context.user.username) {
+                // check if the user owns the list
+                const list = await List.findOne({ _id: listId });
+                if (list.owner !== context.user.username) {
+                    throw new Error("you don't have permission to delete this list");
+                }
+
+                // delete the list
+                const deletedList = await List.findOneAndDelete({ _id: listId });
+
+                if (!deletedList) {
+                    throw new Error("list not found");
+                };
+
+                // update user information
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { 
+                        $pull: { 
+                            ownedLists: listId,
+                            memberedLists: listId 
+                        }
+                    },
+                    { new: true }
+                );
+                return deletedList;
+            };
+        },
     // //     removeList: async (parent, { listId }) => {
     // //         return List.findOneAndDelete({ _id: listId });
     // //     },

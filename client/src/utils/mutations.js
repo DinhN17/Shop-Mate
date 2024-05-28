@@ -37,3 +37,14 @@ export const ADD_LIST = gql`
       }
   }
 `;
+
+export const DELETE_LIST = gql`
+  mutation deleteList($listId: ID!) {
+      deleteList(listId: $listId) {
+          _id
+          name
+          owner
+          description
+      }
+  }
+`

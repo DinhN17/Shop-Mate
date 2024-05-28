@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Button, Link } from '@chakra-ui/react'
 import { useMutation } from '@apollo/client';
 
 import { ADD_LIST  } from '../utils/mutations';
@@ -64,7 +64,7 @@ const ShoppingListForm = () => {
                         value={formState.description}
                         onChange={(e) => setFormState({ ...formState, description: e.target.value })}
                     />
-                    <button className='btn btn-block' type='submit'>Add List</button>
+                    <Button colorScheme="teal" size="sm" type='submit'>Add List</Button>
             </form>
             ):(
                 <p>Please login to add a list.</p>
