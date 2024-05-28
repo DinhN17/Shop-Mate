@@ -48,7 +48,15 @@ const typeDefs = `
     type Mutation { 
         createUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
-       
+        
+        createList(name: String!, description: String, owner: User, members:[String]): List
+        removeList(listId: ID!, owner: User): List
+        editList(listId: ID!, name: String!, description: String): List
+        
+        addItemToList:(listId: ID!, name: String!, addedBy: User!, description: String ): List
+        removeItem(listId: ID!, itemId: ID!): List
+        editItem(listId: ID!, itemId: ID!, name: String, description: String): Item
+        buyItem(listId: ID!, itemId: ID!, boughtBy: User): List 
     }
 `;
 //  createList(name: String!, description: String, owner: User, members:[String]): List
@@ -59,4 +67,5 @@ const typeDefs = `
 // removeItem(listId: ID!, itemId: ID!): List
 // editItem(listId: ID!, itemId: ID!, name: String, description: String): Item
 // buyItem(listId: ID!, itemId: ID!, boughtBy: User): List
+
 module.exports = typeDefs;
