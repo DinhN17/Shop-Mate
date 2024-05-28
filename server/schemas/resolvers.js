@@ -1,6 +1,10 @@
 const { User, List } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
+
+const jwt = require('jsonwebtoken');
+
 const mongoose = require('mongoose');
+
 
 const resolvers = {
     Query: {
@@ -52,11 +56,20 @@ const resolvers = {
     },
 
     Mutation: {
-        createUser: async (parent, { firstName, lastName, username, email, password}) => {
-            const user = await User.create({ firstName, lastName, username, email, password});
-            const token = signToken(user); 
+        createUser: async (parent, { firstName, lastName, username, email, password }) => {
+            try {
+                // Create a new user in the database
+                const user = await User.create({ firstName, lastName, username, email, password });
+                
+                // Sign a JWT token with the new user's data
+                const token = signToken(user);
 
-            return {token, user};
+                // Return the token and user data
+                return { token, user };
+            } catch (error) {
+                console.error(error);
+                throw new AuthenticationError('Error creating user');
+            }
         },
         login: async (parent, {email, password}) => {
             const user = await User.findOne({ email });

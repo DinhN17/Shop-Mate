@@ -39,8 +39,8 @@ const Login = () => {
      };
 
   return (
-    <Box px="200px" py="50px">
-        <Card px="250px" py="100px">
+    <Box px={38} py={5} my={40}>
+        <Card px={10} py={8}>
         <CardHeader >
             <Heading size='md'>Login</Heading>
         </CardHeader>
@@ -80,6 +80,7 @@ const Login = () => {
               >
                 Submit
               </Button>
+              <Link style={{ color: 'blue', fontSize: "15px" }} to="/signup">Dont have an account? Sign up</Link>
             </Stack>
             </form>
             )}

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { CREATE_USER } from '../utils/mutations';
 import { Button, Input, Stack, Box, Card, CardHeader, CardBody,  Heading, Text } from '@chakra-ui/react';
+
 import Auth from '../utils/auth';
 
 const Signup = () => {
@@ -14,6 +15,7 @@ const Signup = () => {
         password: '',
     });
     const [createUser, { error, data }] = useMutation(CREATE_USER);
+    const [formError, setFormError] = useState('');
 
     const handleChange = (event) => {
         const{ name, value } = event.target;
@@ -24,26 +26,33 @@ const Signup = () => {
         });
     };
 
-    const handleFromSubmit = async (event) => {
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
+
+        if (!formState.firstName || !formState.lastName || !formState.username || !formState.email || !formState.password) {
+            setFormError('All fields are required.');
+            return;
+        }
+
         console.log(formState);
 
         try {
             const { data } = await createUser({
-                varibles: { ...formState },
+                variables: { ...formState },
             }); 
 
             Auth.login(data.createUser.token);
         } catch (e) {
-            console.error(e);
+            console.error('Error during form submission:', e);
+            setFormError('Failed to create profile. Please try again.');
         }
     };
 
     return (
         <Box>
-            <Card>
+            <Card my={30} mx={10} py={15} px={10}>
                 <CardHeader>
-                    <Heading  size='md'> Signin</Heading> 
+                    <Heading  size='md'> Sign In</Heading> 
                 </CardHeader>
 
                 <CardBody>
@@ -54,7 +63,7 @@ const Signup = () => {
                     </p>
 
                 ) : (
-                    <form onSubmit={handleFromSubmit}>
+                    <form onSubmit={handleFormSubmit}>
                         <Stack spacing={4}> 
                             <Input
                             size = "md"
@@ -77,7 +86,7 @@ const Signup = () => {
                             placeholder=" Your username"
                             name = "username"
                             type = "text"
-                            value = {formState.name}
+                            value = {formState.username}
                             onChange={handleChange}
                             />
                             <Input
@@ -101,14 +110,21 @@ const Signup = () => {
                             className="btn btn-block btn-info"
                             style={{ cursor: 'pointer' }}
                             type="submit"
+                            mt={8}
                             >
                             Create Profile
                             </Button>
+                            <Link style={{ color: 'blue', fontSize: "15px" }} to="/login">Already have an account? Login</Link>
 
                         </Stack>
 
                     </form>
                 )}
+                {formError && (
+                        <Text pt="5px" color="red.500">
+                            {formError}
+                        </Text>
+                    )}
                 {error && (
                 <Text pt="5px">
                 {error.message}
