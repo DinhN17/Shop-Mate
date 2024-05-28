@@ -88,6 +88,10 @@ const resolvers = {
         
               return { token, user };
         },
+
+        removeItem: async (parent, { listId, itemId }) => {
+            return Item.findOneAndDelete({ itemId })
+        },
         addList: async (parent, { name, description }, context) => {
 
             if (context.user.username) { 
@@ -117,7 +121,7 @@ const resolvers = {
                     throw new Error("user not found");
                 };
                 return list; 
-            }
+            };
             
         },
 
@@ -181,32 +185,6 @@ const resolvers = {
                 return newList;
             };
         },
-    // //     removeList: async (parent, { listId }) => {
-    // //         return List.findOneAndDelete({ _id: listId });
-    // //     },
-    // //     editList: async (parent, { listId, name, description, members }) => {
-    // //         const list =  List.findOneAndUpdate( 
-    // //             listId,
-    // //             { name, description, members },
-    // //             { new: true }
-    // //         );
-    // //         if (!list) {
-    // //             throw new Error("list not found.");
-    // //         }; 
-    // //         return list; 
-    // //     },
-    //     // addItemToList: async (parent, { listId, name, addedBy, description }) => {
-    //     //     const newList = List.findByIdAndUpdate {
-    //     //         listId, 
-    //     //         { }
-    //     //     }
-    //     // },
-    //     // removeItem: async (parent, { listId, itemId }) => {
-    //     //     return Item.findOneAndDelete({ itemId })
-    //     // },
-    //     // editItem: async (parent, {listId, itemId, name, description }) => {
-            
-    //     // },
 
     },
 };
