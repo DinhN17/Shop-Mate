@@ -1,5 +1,7 @@
-// import { Link } from 'react-router-dom';
-import { Box, Container, SimpleGrid, Image, Text, Button, Link, Flex, Stack } from '@chakra-ui/react';
+import { Link as ReactRouterLink } from 'react-router-dom'
+import { Link as ChakraLink } from '@chakra-ui/react'
+
+import { Box, Container, SimpleGrid, Image, Text, Button, Flex, Stack } from '@chakra-ui/react';
 import { useMutation } from '@apollo/client';
 
 import { DELETE_LIST, DUPLICATE_LIST } from '../utils/mutations';
@@ -48,9 +50,9 @@ export default function ShoppingList({lists}) {
       {lists &&
         lists.map((list) => (
           <Box bg="gray.50" p={4} borderRadius="md" textAlign="center" key={list._id}>
-            <Link to={`/lists/${list._id}`}>
+            <ChakraLink as={ReactRouterLink} to={`/lists/${list._id}`}>
               Name: {list.name}.
-            </Link>
+            </ChakraLink>
             <h4>Created by: {list.owner}</h4>
             <h4>Description: {list.description}</h4>
             <Stack direction='row' spacing={4} align='center' justify ='center'>
