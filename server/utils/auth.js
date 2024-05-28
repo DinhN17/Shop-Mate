@@ -10,28 +10,29 @@ module.exports = {
             code: 'UNAUTHENTICATED',
         },
     }), 
+
     signToken: function ({ email, username, _id }) {
         const payload = { email, username, _id };
-        console.log("payload",payload);
+        // console.log("payload",payload);
         return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
     },
     authMiddleware: function ({ req }) {
         let token = req.body.token || req.query.token || req.headers.authorization;
-        console.log("token",token);
     
         if (req.headers.authorization) {
           token = token.split(' ').pop().trim();
         }
-
-        console.log("token",token);
     
         if (!token) {
           return req;
         }
-    
+        
+        console.log("try function not operating");
+
         try {
+          console.log("this is the error")
           const { data } = jwt.verify(token, secret, { maxAge: expiration });
-          console.log("authenticatedPerson", data);
+          // console.log("authenticatedPerson", data);
           req.user = data;
         } catch {
           console.log('Invalid token');

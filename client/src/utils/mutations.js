@@ -13,16 +13,57 @@ export const LOGIN_USER = gql`
 `;
 
 export const CREATE_USER = gql`
-    mutation createUser($firstName: String!, $lastName: String!, $username: String!, $email: String!, $password: String!){
-        createUser(firstName: $firstName, lastName: $lastName, username: $username, email: $email, password: $password){
+    mutation addUser(
+    $firstName: String!
+    $lastName: String!
+    $username: username!
+    $email: String!
+    $password: String!
+    ) {
+        addUser(
+            firstName: $firstName
+            lastName: $lastName
+            username: $username
+            email: $email
+            password: $password
+        ) {
             token
             user {
-              _id
-              username
+            _id
             }
-            firstName
-            lastName
-            email
-       }
+        }
     }
+`;
+
+export const ADD_LIST = gql`
+  mutation addList($name: String!, $description: String!) {
+      addList(name: $name, description: $description) {
+          _id
+          name
+          owner
+          description
+      }
+  }
+`;
+
+export const DELETE_LIST = gql`
+  mutation deleteList($listId: ID!) {
+      deleteList(listId: $listId) {
+          _id
+          name
+          owner
+          description
+      }
+  }
+`;
+
+export const DUPLICATE_LIST = gql`
+  mutation duplicateList($listId: ID!) {
+      duplicateList(listId: $listId) {
+          _id
+          name
+          owner
+          description
+      }
+  }
 `;
