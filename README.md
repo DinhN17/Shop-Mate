@@ -46,11 +46,9 @@ This group project has been completed as a part of the Adelaide University Web D
 ## Features
 ADD FEATURES
 - User Authentication: Secure user authentication system with support for registration, login, and logout.
-- Profile Management: Allow users to update their profiles, including profile picture, passowrd and other information.
-- Dashboard: Personalized dashboard for each users added snacks and a list of snacks they would liek to try.
-- Content Creation: Create and edit any snack posts content.
-- Search Functionality: Search functionality to help users find specific snacks.
-- API Integration: Integration with third-party API called open food facts provided numourous snacks and there information.
+- Dashboard: Personalized dashboard for each users can create and add list items to the list.
+- Content Creation: Create and edit the users lists that they are collaborators.
+- API Integration: Integration of Stripe with is a payment platfom api.
 
 
  
