@@ -90,7 +90,7 @@ const resolvers = {
         },
 
         removeItem: async (parent, { listId, itemId }) => {
-            return Item.findOneAndDelete({ itemId })
+            return Item.findOneAndDelete({ itemId });
         },
         addList: async (parent, { name, description }, context) => {
 
@@ -185,7 +185,6 @@ const resolvers = {
                 return newList;
             };
         },
-
     },
 };
 
