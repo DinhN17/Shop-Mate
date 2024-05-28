@@ -50,6 +50,7 @@ const typeDefs = `
         login(email: String!, password: String!): Auth
         addList(name: String!, description: String!): List       
         deleteList(listId: ID!): List
+        duplicateList(listId: ID!): List
     }
 `;
 //  createList(name: String!, description: String, owner: User, members:[String]): List

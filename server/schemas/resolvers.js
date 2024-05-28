@@ -137,6 +137,37 @@ const resolvers = {
                 return deletedList;
             };
         },
+
+        // duplicateList: create a new list from information of a list, remove boughtBy of Items
+        duplicateList: async (parent, { listId }, context) => {
+            if (context.user.username) {
+                const list = await List.findOne({ _id: listId });
+                if (!list) {
+                    throw new Error("list not found");
+                };
+                let { name, description, owner, items } = list;
+                // remove boughtBy of Items
+                items.map(item => item.boughtBy = null);
+                // update owner
+                owner = context.user.username;
+                // update name
+                name = `${name} - Copy`;
+                // create new list
+                const newList = await List.create({name, description, owner, items});
+                // update user information
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { 
+                        $addToSet: { 
+                            ownedLists: newList._id,
+                            memberedLists: newList._id 
+                        }
+                    },
+                    { new: true }
+                );
+                return newList;
+            };
+        },
     // //     removeList: async (parent, { listId }) => {
     // //         return List.findOneAndDelete({ _id: listId });
     // //     },

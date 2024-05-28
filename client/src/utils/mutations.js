@@ -48,3 +48,14 @@ export const DELETE_LIST = gql`
       }
   }
 `
+
+export const DUPLICATE_LIST = gql`
+  mutation duplicateList($listId: ID!) {
+      duplicateList(listId: $listId) {
+          _id
+          name
+          owner
+          description
+      }
+  }
+`

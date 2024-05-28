@@ -2,7 +2,7 @@
 import { Box, Container, SimpleGrid, Image, Text, Button, Link, Flex, Stack } from '@chakra-ui/react';
 import { useMutation } from '@apollo/client';
 
-import { DELETE_LIST } from '../utils/mutations';
+import { DELETE_LIST, DUPLICATE_LIST } from '../utils/mutations';
 import { GET_LISTS_BY_ME } from '../utils/queries';
 
 export default function ShoppingList({lists}) {
@@ -14,6 +14,23 @@ export default function ShoppingList({lists}) {
     (DELETE_LIST, {
       refetchQueries: [{ query: GET_LISTS_BY_ME }]
     });
+
+  const [duplicateList] = useMutation
+    (DUPLICATE_LIST, {
+      refetchQueries: [{ query: GET_LISTS_BY_ME }]
+    });
+  
+  // Duplicate List
+  const handleDuplicateList = async (listId) => {
+    // console.log(list);
+    try {
+      const { data } = await duplicateList({
+        variables: { listId },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleDeleteList = async (listId) => {
     // console.log(list);
@@ -45,7 +62,8 @@ export default function ShoppingList({lists}) {
               </Button>
               <Button 
                 colorScheme="teal" 
-                size="sm" 
+                size="sm"
+                onClick={() => handleDuplicateList(list._id)}
               >
                 Duplicate
               </Button>
