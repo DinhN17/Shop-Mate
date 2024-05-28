@@ -2,11 +2,10 @@
 
 ## Description
 
-The challenge for this assignment was to create our first fullstack application using MERN stack from the ground up as a group. Ultimately what we ended up creating is a website where users can create various types of lists, for shopping, checking off tasks and anything and everything else. Users are also able to share and collaborate on lists together to work towards checking everything off. 
+The challenge for this assignment was to create our first full-stack application using the MERN stack from the ground up as a group. Ultimately, what we ended up creating is a website where users can create various types of lists for shopping, checking off tasks, and anything else they need to organize. Users are also able to share and collaborate on lists together to work towards completing tasks. This would be a great application for housemates, families, and project groups to stay organized and ahead of tasks. Our motivation for creating this application was to help users easily stay organized throughout projects and shopping lists, ensuring items don't get purchased twice.
 
-This way when another user intends to travel to a unique country or continent they will have an idea what unique snacks they have to try when they go to a supermarket in another country. Our motivation for creating this application was for users to easily access and gain knowledge of different snacks local to the country they are travelling too, this site allows them to view top rated snacks from a country, veiw and browse through different categories of snacks, making it easier for users experience various different foods in a new country. Throughout this project we applied the knowlege gained from the Adelaide University Web Development bootcamp. We utilised the handlebars.js templating engine to dynamically generate our web pages. We applied tailwind throughout our project to create a beautiful and user friendly experience. Additionally we inlcluded mySQL (with javascript) to create databases for the site and sequelize's ORM to create our relational database structure.
+Throughout this project, we applied the knowledge gained from the Adelaide University Web Development boot camp. We utilized the MERN stack, using Mongoose for our database, Express for our server, React for our front end, and Node for our backend. To create a beautiful and sleek user interface, we used Chakra UI, a React component library. Additionally, we implemented Stripe, a payment API, to add more functionality to our project.
 
-ADD
 
 Live Link: ADD LINK
 
@@ -28,14 +27,10 @@ If you would like to install this project on your local computer, follow the fol
 
 5. Use "npm run develop" to run a local version of this application.
 
-INSTALLATION
- 
 
 ## Usage
 
-You can access a deployed version of this application [here]()
-
-DEPLOYED VERSION
+You can access a deployed version of this application [here]() - DEPLOYED VERSION
 
 
 ## Credits
