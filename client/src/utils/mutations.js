@@ -67,3 +67,50 @@ export const DUPLICATE_LIST = gql`
       }
   }
 `;
+
+// Define the REMOVE_ITEM mutation
+export const REMOVE_ITEM = gql`
+  mutation removeItem($listId: ID!, $itemId: ID!) {
+    removeItem(listId: $listId, itemId: $itemId) {
+      _id
+      name
+      items {
+        _id
+        name
+        description
+        addedBy
+        boughtBy
+      }
+    }
+  }
+`;
+
+// Define the EDIT_ITEM mutation
+export const EDIT_ITEM = gql`
+  mutation editItem($listId: ID!, $itemId: ID!, $name: String, $description: String) {
+    editItem(listId: $listId, itemId: $itemId, name: $name, description: $description) {
+      _id
+      name
+      description
+      addedBy
+      boughtBy
+    }
+  }
+`;
+
+// Define the BUY_ITEM mutation
+export const BUY_ITEM = gql`
+  mutation buyItem($listId: ID!, $itemId: ID!, $boughtBy: String!) {
+    buyItem(listId: $listId, itemId: $itemId, boughtBy: $boughtBy) {
+      _id
+      name
+      items {
+        _id
+        name
+        description
+        addedBy
+        boughtBy
+      }
+    }
+  }
+`;
