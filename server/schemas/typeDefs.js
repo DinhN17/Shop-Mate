@@ -42,13 +42,15 @@ const typeDefs = `
         listsMemberedByUser(username: String!): [List]
         lists: [List]
         list(listId: ID!): List
-        me: User
+        me: [List]
     }
 
     type Mutation { 
         createUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
-       
+        addList(name: String!, description: String!): List       
+        deleteList(listId: ID!): List
+        duplicateList(listId: ID!): List
     }
 `;
 //  createList(name: String!, description: String, owner: User, members:[String]): List

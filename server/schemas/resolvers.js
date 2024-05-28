@@ -1,6 +1,10 @@
 const { User, List } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
+
 const jwt = require('jsonwebtoken');
+
+const mongoose = require('mongoose');
+
 
 const resolvers = {
     Query: {
@@ -41,10 +45,11 @@ const resolvers = {
 
         // query me: get information of the logged in user
         me: async (parent, args, context) => {
-            console.log("context", context.user);
+            // console.log("context", context.user);
             
             if (context.user) {
-                return await User.findOne({ _id: context.user._id }).populate('ownedLists').populate('memberedLists');
+                const lists = await User.findOne({ _id: context.user._id }).populate('memberedLists');
+                return lists;
             }
             throw new AuthenticationError('You need to be logged in!');
         }
@@ -83,13 +88,99 @@ const resolvers = {
         
               return { token, user };
         },
-    //    createList: async (parent, { name, description, owner, members}) => {
-    //        if (context.user) { 
-    //         const list = await List.create({name, description, owner, members});
-    //         return list; 
-    //        }
+        addList: async (parent, { name, description }, context) => {
+
+            if (context.user.username) { 
+
+                const owner = context.user.username;
+                const list = await List.create({name, description, owner});
+                console.log(list);
+                // update new list to user information
+                if (!list) {
+                    throw new Error("list failed to create");
+                };
+                const listId = new mongoose.mongo.ObjectId(list._id);
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { 
+                        $addToSet: { 
+                            ownedLists: listId,
+                            memberedLists: listId 
+                        }
+                    },
+                    { new: true }
+                );
+
+                console.log(updatedUser);
+
+                if (!updatedUser) {
+                    throw new Error("user not found");
+                };
+                return list; 
+            }
             
-    //     },
+        },
+
+        deleteList: async (parent, { listId }, context) => {
+            if (context.user.username) {
+                // check if the user owns the list
+                const list = await List.findOne({ _id: listId });
+                if (list.owner !== context.user.username) {
+                    throw new Error("you don't have permission to delete this list");
+                }
+
+                // delete the list
+                const deletedList = await List.findOneAndDelete({ _id: listId });
+
+                if (!deletedList) {
+                    throw new Error("list not found");
+                };
+
+                // update user information
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { 
+                        $pull: { 
+                            ownedLists: listId,
+                            memberedLists: listId 
+                        }
+                    },
+                    { new: true }
+                );
+                return deletedList;
+            };
+        },
+
+        // duplicateList: create a new list from information of a list, remove boughtBy of Items
+        duplicateList: async (parent, { listId }, context) => {
+            if (context.user.username) {
+                const list = await List.findOne({ _id: listId });
+                if (!list) {
+                    throw new Error("list not found");
+                };
+                let { name, description, owner, items } = list;
+                // remove boughtBy of Items
+                items.map(item => item.boughtBy = null);
+                // update owner
+                owner = context.user.username;
+                // update name
+                name = `${name} - Copy`;
+                // create new list
+                const newList = await List.create({name, description, owner, items});
+                // update user information
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { 
+                        $addToSet: { 
+                            ownedLists: newList._id,
+                            memberedLists: newList._id 
+                        }
+                    },
+                    { new: true }
+                );
+                return newList;
+            };
+        },
     // //     removeList: async (parent, { listId }) => {
     // //         return List.findOneAndDelete({ _id: listId });
     // //     },
