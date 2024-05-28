@@ -44,7 +44,7 @@ This group project has been completed as a part of the Adelaide University Web D
 
 
 ## Features
-ADD FEATURES
+
 - User Authentication: Secure user authentication system with support for registration, login, and logout.
 - Dashboard: Personalized dashboard for each users can create and add list items to the list.
 - Content Creation: Create and edit the users lists that they are collaborators.
