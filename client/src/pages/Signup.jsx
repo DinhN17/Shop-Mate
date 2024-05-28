@@ -52,7 +52,7 @@ const Signup = () => {
         <Box>
             <Card my={30} mx={10} py={15} px={10}>
                 <CardHeader>
-                    <Heading  size='md'> Sign In</Heading> 
+                    <Heading  size='md'> Sign up</Heading> 
                 </CardHeader>
 
                 <CardBody>
