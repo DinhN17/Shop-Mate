@@ -15,6 +15,7 @@ const typeDefs = `
         name: String
         description: String
         owner: String
+        members: [String]
         items: [Item]
         createdAt: String
         updatedAt: String
@@ -37,6 +38,7 @@ const typeDefs = `
     type Query {
         users: [User]
         user(username: String!): User
+        userByEmail(email: String!): User
         listsByUser(username: String!): [List]
         listsOwnedByUser(username: String!): [List]
         listsMemberedByUser(username: String!): [List]
@@ -53,9 +55,11 @@ const typeDefs = `
         removeItem(listId: ID!, itemId: ID!): List
         editItem(listId: ID!, itemId: ID!, name: String, description: String): Item
         buyItem(listId: ID!, itemId: ID!, boughtBy: String): List 
+        
         addList(name: String!, description: String!): List       
         deleteList(listId: ID!): List
         duplicateList(listId: ID!): List
+        shareListWithFriend(listId: ID!, friendUsername: String!): List
     }
 `;
 //  createList(name: String!, description: String, owner: User, members:[String]): List

@@ -68,6 +68,17 @@ export const DUPLICATE_LIST = gql`
   }
 `;
 
+// Define SHARE_LIST_WITH_FRIEND mutation
+export const SHARE_LIST_WITH_FRIEND = gql`
+  mutation shareListWithFriend($listId: ID!, $friendUsername: String!) {
+    shareListWithFriend(listId: $listId, friendUsername: $friendUsername) {
+      _id
+      name
+      members
+    }
+  }
+`;
+
 // Define the REMOVE_ITEM mutation
 export const REMOVE_ITEM = gql`
   mutation removeItem($listId: ID!, $itemId: ID!) {

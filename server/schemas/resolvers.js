@@ -1,10 +1,10 @@
+const { PiUserBold } = require('react-icons/pi');
 const { User, List } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const jwt = require('jsonwebtoken');
 
 const mongoose = require('mongoose');
-
 
 const resolvers = {
     Query: {
@@ -14,6 +14,10 @@ const resolvers = {
 
         user: async (parent, { username }) => {
             return await User.findOne({ username }).populate('ownedLists').populate('memberedLists');
+        },
+
+        userByEmail: async (parent, { email }) => {
+            return await User.findOne({ email });
         },
 
         listsByUser: async (parent, { username }) => {
@@ -185,6 +189,38 @@ const resolvers = {
                 return newList;
             };
         },
+
+        // shareListWithFriend: share a list with a friend
+        shareListWithFriend: async (parent, { listId, friendUsername }, context) => {
+            if (context.user.username) {
+                // check if list exists
+                const list = await List.findOne({ _id: listId });
+                if (!list) {
+                    throw new Error("list not found");
+                };
+
+                // check if friend exists
+                const friend = await User.findOne({ username: friendUsername });
+                if (!friend) {
+                    throw new Error("friend not found");
+                };
+
+                // update list information
+                const updatedList = await List.findOneAndUpdate(
+                    { _id: listId },
+                    { $addToSet: { members: friend.username } },
+                    { new: true }
+                );
+
+                // update user information, in future it should be get confirm from friend
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: friend._id },
+                    { $addToSet: { memberedLists: listId } },
+                    { new: true }
+                );
+                return updatedList;
+            };
+        }
     },
 };
 

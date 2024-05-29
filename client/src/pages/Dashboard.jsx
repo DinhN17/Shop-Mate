@@ -17,7 +17,7 @@ const Dashboard = () => {
 
     const lists = data?.me.memberedLists || [];
 
-    console.log(lists);
+    // console.log(lists);
 
     if (!Auth.loggedIn()) {
         window.location.assign("/login");
