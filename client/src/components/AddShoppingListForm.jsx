@@ -13,10 +13,7 @@ const ShoppingListForm = () => {
 
     const [addList, { error }] = useMutation(
         ADD_LIST, {
-            refetchQueries: [
-                GET_LISTS_BY_ME,
-                'lists'
-            ]
+            refetchQueries: [{ query: GET_LISTS_BY_ME }]
         }
     );
 
