@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Box, Container, SimpleGrid, Image, Text, Button, Flex, Stack } from '@chakra-ui/react';
 import { useMutation } from '@apollo/client';
 import { REMOVE_ITEM, EDIT_ITEM, BUY_ITEM } from '../utils/mutations';
 import { GET_LISTS_BY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 
-const ItemsList = ({ items, listId, isLoggedInUser = false }) => {
+const ItemsList = ({ items, listId }) => {
   const [removeItem] = useMutation(REMOVE_ITEM, {
     refetchQueries: [{ query: GET_LISTS_BY_ME }]
   });
@@ -59,22 +60,45 @@ const ItemsList = ({ items, listId, isLoggedInUser = false }) => {
   }
 
   return (
-    <div>
-      <ul>
-        {items.map((item) => (
-          <li key={item._id}>
-            <span>{item.name} - {item.description}</span>
-            {isLoggedInUser && (
-              <>
-                <button onClick={() => handleRemoveItem(item._id)}>Remove</button>
-                <button onClick={() => handleEditItem(item._id, item.name, item.description)}>Edit</button>
-                <button onClick={() => handleBuyItem(item._id)}>Buy</button>
-              </>
+    <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4} mt={4}>
+      {Auth.loggedIn() && items &&
+        items.map((item) => (
+          <Box bg="gray.50" p={4} borderRadius="md" textAlign="center" key={item._id}>
+            <h4>Name: {item.name}.</h4>  
+            <p>Description: {item.description}</p>
+            <h3>Created by: {item.addedBy}</h3>
+            {/* Buy button */}
+            {item.boughtBy ? (
+              <h4>Bought by: {item.boughtBy}</h4>
+              ) : (
+                <button>Buy</button>
             )}
-          </li>
+            <Stack direction='row' spacing={4} align='center' justify ='center'>
+              <Button 
+                colorScheme="blue" 
+                size="sm" 
+                onClick={() => handleEditItem(item._id, item.name, item.description)}
+              >
+                Edit
+              </Button>
+              <Button 
+                colorScheme="teal" 
+                size="sm"
+                onClick={() => handleBuyItem(item._id)}
+              >
+                Buy
+              </Button>
+              <Button 
+                colorScheme="red" 
+                size="sm"
+                onClick={() => handleRemoveItem(item._id)}
+              >
+                Remove
+              </Button>
+            </Stack>
+          </Box>
         ))}
-      </ul>
-    </div>
+    </SimpleGrid>
   );
 };
 
