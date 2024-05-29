@@ -3,23 +3,21 @@ import { Link } from 'react-router-dom';
 import { Box, Container, SimpleGrid, Image, Text, Button, Flex, Stack } from '@chakra-ui/react';
 import { useMutation } from '@apollo/client';
 import { REMOVE_ITEM, EDIT_ITEM, BUY_ITEM } from '../utils/mutations';
-import { GET_LISTS_BY_ME } from '../utils/queries';
+import { GET_LIST } from '../utils/queries';
 import Auth from '../utils/auth';
 
 const ItemsList = ({ items, listId }) => {
   const [removeItem] = useMutation(REMOVE_ITEM, {
-    refetchQueries: [{ query: GET_LISTS_BY_ME }]
+    refetchQueries: [{ query: GET_LIST, variables: { id: listId } }]
   });
-  const [editItem] = useMutation(EDIT_ITEM, {
-    refetchQueries: [{ query: GET_LISTS_BY_ME }]
-  });
+  
   const [buyItem] = useMutation(BUY_ITEM, {
-    refetchQueries: [{ query: GET_LISTS_BY_ME }]
+    refetchQueries: [{ query: GET_LIST, variables: { id: listId } }]
   });
 
-  const handleRemoveItem = async (itemId) => {
+  const handleRemoveItem = async (itemId, listId) => {
     try {
-      await removeItem({
+      const { data } = await removeItem({
         variables: { listId, itemId }
       });
     } catch (err) {
@@ -28,13 +26,13 @@ const ItemsList = ({ items, listId }) => {
   };
 
   const handleEditItem = async (itemId, name, description) => {
-    try {
-      await editItem({
-        variables: { listId, itemId, name, description }
-      });
-    } catch (err) {
-      console.error(err);
-    }
+    // try {
+    //   await editItem({
+    //     variables: { listId, itemId, name, description }
+    //   });
+    // } catch (err) {
+    //   console.error(err);
+    // }
   };
 
   const handleBuyItem = async (itemId) => {
@@ -68,11 +66,7 @@ const ItemsList = ({ items, listId }) => {
             <p>Description: {item.description}</p>
             <h3>Created by: {item.addedBy}</h3>
             {/* Buy button */}
-            {item.boughtBy ? (
-              <h4>Bought by: {item.boughtBy}</h4>
-              ) : (
-                <button>Buy</button>
-            )}
+            {item.boughtBy && <h4>Bought by: {item.boughtBy}</h4>}
             <Stack direction='row' spacing={4} align='center' justify ='center'>
               <Button 
                 colorScheme="blue" 
@@ -84,14 +78,14 @@ const ItemsList = ({ items, listId }) => {
               <Button 
                 colorScheme="teal" 
                 size="sm"
-                onClick={() => handleBuyItem(item._id)}
+                onClick={() => handleBuyItem(item._id, listId)}
               >
                 Buy
               </Button>
               <Button 
                 colorScheme="red" 
                 size="sm"
-                onClick={() => handleRemoveItem(item._id)}
+                onClick={() => handleRemoveItem(item._id, listId)}
               >
                 Remove
               </Button>

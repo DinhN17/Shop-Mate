@@ -89,7 +89,30 @@ const resolvers = {
               return { token, user };
         },
 
-        removeItem: async (parent, { listId, itemId }) => {
+        removeItem: async (parent, { listId, itemId }, context) => {
+
+            // check if user is logged in
+            if (context.user) {
+                // check if the user owns the list
+                const list = await List.findOne({ _id: listId });
+                if (!list) {
+                    throw new Error("list not found");
+                };
+
+                if (list.owner !== context.user.username) {
+                    throw new Error("user not authorized");
+                };
+
+                // remove the item from the list
+                const updatedList = await List.findOneAndUpdate(
+                    { _id: listId },
+                    { $pull: { items: { _id: itemId } } },
+                    { new: true }
+                );
+
+                return updatedList;
+            }
+            const list = await List.findOne({ _id: listId });
             return Item.findOneAndDelete({ itemId });
         },
         addList: async (parent, { name, description }, context) => {
