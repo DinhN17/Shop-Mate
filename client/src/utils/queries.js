@@ -1,43 +1,30 @@
 import { gql } from '@apollo/client';
 
-
 export const GET_LISTS_BY_ME = gql`
-  query me {
-    me {
-      lists {
-        _id
-        name
-        description
-        owner
-        items {
-          _id
-          name
-          description
-          addedBy
-          boughtBy
+    query me {
+        me {
+            _id
+            memberedLists {
+                _id
+                name
+                description
+                owner
+            }
         }
-      }
     }
-  }
-`;
+`
 
-export const GET_LIST = gql`
-  query getList($id: ID!) {
-    list(listId: $id) {
-      _id
-      name
-      description
-      owner
-      items {
-        _id
-        name
-        description
-        addedBy
-        boughtBy
-      }
+export const GET_LISTS = gql`
+    query getLists {
+        lists {
+            _id
+            name
+            description
+            owner
+        }
     }
-  }
-`;
+`
+
 // get a signle list
 export const GET_LIST = gql`
     query getList($id: ID!) {
