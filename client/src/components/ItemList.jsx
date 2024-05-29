@@ -35,17 +35,12 @@ const ItemsList = ({ items, listId }) => {
     // }
   };
 
-  const handleBuyItem = async (itemId) => {
+  const handleBuyItem = async (itemId, listId) => {
     try {
-      const user = Auth.getUser();
-      if (!user || !user.authenticatedUser || !user.authenticatedUser.username) {
-        throw new Error('User is not authenticated');
-      }
       await buyItem({
         variables: {
           listId,
           itemId,
-          boughtBy: user.authenticatedUser.username
         }
       });
     } catch (err) {

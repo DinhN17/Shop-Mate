@@ -115,6 +115,22 @@ const resolvers = {
             const list = await List.findOne({ _id: listId });
             return Item.findOneAndDelete({ itemId });
         },
+
+        buyItem: async (parent, { listId, itemId }, context) => {
+
+            // check if user is logged in
+            if (context.user) {
+                // update item's boughtBy
+                const updatedList = await List.updateOne(
+                    { _id: listId, 'items._id': itemId },
+                    { $set: { 'items.$.boughtBy': context.user.username } },
+                    { new: true }
+                );
+                return updatedList;
+
+            }
+        },
+        
         addList: async (parent, { name, description }, context) => {
 
             if (context.user.username) { 
