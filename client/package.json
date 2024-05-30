@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.10.4",
+    "@chakra-ui/icons": "^2.1.1",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",

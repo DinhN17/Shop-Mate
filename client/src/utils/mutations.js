@@ -38,10 +38,10 @@ export const CREATE_USER = gql`
 export const ADD_LIST = gql`
   mutation addList($name: String!, $description: String!) {
       addList(name: $name, description: $description) {
-          _id
-          name
-          owner
-          description
+        _id
+        name
+        description
+        owner
       }
   }
 `;
@@ -65,6 +65,17 @@ export const DUPLICATE_LIST = gql`
           owner
           description
       }
+  }
+`;
+
+// Define SHARE_LIST_WITH_FRIEND mutation
+export const SHARE_LIST_WITH_FRIEND = gql`
+  mutation shareListWithFriend($listId: ID!, $friendUsername: String!) {
+    shareListWithFriend(listId: $listId, friendUsername: $friendUsername) {
+      _id
+      name
+      members
+    }
   }
 `;
 
@@ -102,6 +113,23 @@ export const EDIT_ITEM = gql`
 export const BUY_ITEM = gql`
   mutation buyItem($listId: ID!, $itemId: ID!) {
     buyItem(listId: $listId, itemId: $itemId) {
+      _id
+      name
+      items {
+        _id
+        name
+        description
+        addedBy
+        boughtBy
+      }
+    }
+  }
+`;
+
+// Define the ADD_ITEM mutation
+export const ADD_ITEM = gql`
+  mutation addItem($listId: ID!, $name: String!, $description: String!) {
+    addItem(listId: $listId, name: $name, description: $description) {
       _id
       name
       items {

@@ -14,10 +14,12 @@ const listSchema = new Schema({
     type: String,
     trim: true,
   },
-  // members: [{
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'User',
-  // }],
+  members: [
+    {
+      type: String,
+      trim: true,
+    },
+  ],
   
   items: [
     {
