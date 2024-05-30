@@ -100,8 +100,8 @@ export const EDIT_ITEM = gql`
 
 // Define the BUY_ITEM mutation
 export const BUY_ITEM = gql`
-  mutation buyItem($listId: ID!, $itemId: ID!, $boughtBy: String!) {
-    buyItem(listId: $listId, itemId: $itemId, boughtBy: $boughtBy) {
+  mutation buyItem($listId: ID!, $itemId: ID!) {
+    buyItem(listId: $listId, itemId: $itemId) {
       _id
       name
       items {
