@@ -141,20 +141,33 @@ const resolvers = {
             console.log("add item", listId);
             // check if user is logged in
             if (context.user) {
+                console.log("check", context.user.username);
                 // check if the user is a member of the list
-                const list = await List.findOne({ _id: listId, members: { $in: [context.user.username] } });
+                const list = await List.findOneAndUpdate(
+                    { _id: listId },
+                    { $addToSet: { items: { name: name, description: description, addedBy: context.user.username } } },
+                    { new: true }
+                );
+                console.log("list", list);
                 if (!list) {
                     throw new Error("list not found");
                 };
 
-                // add the item to the list
-                const List = await List.updateOne(
-                    { _id: listId },
-                    { $addToSet: { items: { name, description, addedBy: context.user.username } } },
-                    { new: true }
-                );
+                // if(!list.members.includes(context.user.username)) {
+                //     throw new Error("user not authorized");
+                // };
 
-                console.log(List);
+                // console.log("check", list.members);
+                // console.log(name, description, context.user.username);
+
+                // add the item to the list
+                // const List = await List.updateOne(
+                //     { _id: listId },
+                //     { $addToSet: { items: { name, description, addedBy: context.user.username } } },
+                //     { new: true }
+                // );
+
+                // console.log(List);
                 return List;
             }
         },
