@@ -69,10 +69,6 @@ const ItemsList = ({ items, listId }) => {
     }
   };
 
-  if (!items.length) {
-    return <h3>No Items Yet</h3>;
-  }
-
   return (
     <VStack>
       <AddingButton
