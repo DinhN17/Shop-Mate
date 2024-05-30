@@ -38,10 +38,13 @@ export const CREATE_USER = gql`
 export const ADD_LIST = gql`
   mutation addList($name: String!, $description: String!) {
       addList(name: $name, description: $description) {
-          _id
-          name
-          owner
-          description
+        _id
+        memberedLists {
+            _id
+            name
+            description
+            owner
+        }
       }
   }
 `;

@@ -163,7 +163,7 @@ const resolvers = {
                 if (!updatedUser) {
                     throw new Error("user not found");
                 };
-                return list; 
+                return updatedUser; 
             };
             
         },
