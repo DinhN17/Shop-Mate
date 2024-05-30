@@ -12,13 +12,6 @@ import { DELETE_LIST, DUPLICATE_LIST, ADD_LIST } from '../utils/mutations';
 import { GET_LISTS_BY_ME, GET_USERNAME_BY_EMAIL } from '../utils/queries';
 
 export default function ShoppingList({lists}) {
-  if (!lists.length) {
-    return <h3>No shopping list Yet</h3>;
-  };
-
-  
-  
-  
 
   // Toggle for Share button
   const { getDisclosureProps, getButtonProps } = useDisclosure()
