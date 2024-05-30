@@ -25,7 +25,7 @@ const SharedList = () => {
     return (
         <div>
             <h1>{data.list.name}</h1>
-            <ItemList items={data.list.items} />
+            <ItemList items={data.list.items} listId={listId} />
         </div>
     );
 };
