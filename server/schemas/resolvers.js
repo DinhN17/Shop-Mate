@@ -134,6 +134,30 @@ const resolvers = {
 
             }
         },
+
+        // Add Item to List
+        addItem: async (parent, { listId, name, description }, context) => {
+
+            console.log("add item", listId);
+            // check if user is logged in
+            if (context.user) {
+                // check if the user is a member of the list
+                const list = await List.findOne({ _id: listId, members: { $in: [context.user.username] } });
+                if (!list) {
+                    throw new Error("list not found");
+                };
+
+                // add the item to the list
+                const List = await List.updateOne(
+                    { _id: listId },
+                    { $addToSet: { items: { name, description, addedBy: context.user.username } } },
+                    { new: true }
+                );
+
+                console.log(List);
+                return List;
+            }
+        },
         
         addList: async (parent, { name, description }, context) => {
 
@@ -158,12 +182,12 @@ const resolvers = {
                     { new: true }
                 );
 
-                console.log(updatedUser);
+                // console.log(updatedUser);
 
                 if (!updatedUser) {
                     throw new Error("user not found");
                 };
-                return updatedUser; 
+                return list; 
             };
             
         },

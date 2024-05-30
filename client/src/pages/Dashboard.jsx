@@ -5,10 +5,10 @@ import AddingButton from "../components/AddingButton";
 import ShoppingList from "../components/ShoppingList";
 
 import { GET_LISTS_BY_ME } from "../utils/queries";
-import { ADD_LIST } from "../utils/mutations";
+// import { ADD_LIST } from "../utils/mutations";
 
 import Auth from "../utils/auth";
-import AddShoppingListForm from "../components/AddShoppingListForm";
+// import AddShoppingListForm from "../components/AddShoppingListForm";
 
 const Dashboard = () => {
 
@@ -20,21 +20,7 @@ const Dashboard = () => {
     // const memberlists = data? || [];
     const lists = data?.me.memberedLists || [];
 
-    // handleAddListSubmit
-    const [addList] = useMutation(ADD_LIST);
-    const handleAddListSubmit = async (event) => {
-        try {
-            const { data } = await addList({
-                variables: { 
-                    name: event.target[0].value, 
-                    description: event.target[1].value
-                }
-            });
-            // console.log(data);
-        } catch (err) {
-            console.error(err);
-        }
-    };
+    
 
     
 
@@ -51,24 +37,10 @@ const Dashboard = () => {
     return (
         <main>
             <Box bg="gray.50" p={4} borderRadius="md" textAlign="center">
-                <div>
-                    {/* <AddShoppingListForm /> */}
-                    <AddingButton
-                    addingButtonLabel="Add a new shopping list"
-                    submitButtonName="OK"
-                    onClickSubmit={handleAddListSubmit}
-                    inputProps={[
-                        { label: "List Name", type: "text" }, 
-                        { label: "Description", type: "text" }
-                        ]}
-                    />
-                </div>
-                <Box bg="gray.50" p={4} borderRadius="md" textAlign="center">
-                    <ShoppingList
-                    lists={lists}
-                    title="Your current shopping lists"
-                    />
-                </Box>
+                <ShoppingList
+                lists={lists}
+                title="Your current shopping lists"
+                />
             </Box>
         </main>
     )

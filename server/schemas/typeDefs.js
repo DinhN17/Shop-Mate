@@ -51,11 +51,11 @@ const typeDefs = `
         createUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
         
-        addItemToList(listId: ID!, name: String!, addedBy: String!, description: String ): List
+        addItem(listId: ID!, name: String!, description: String ): List
         removeItem(listId: ID!, itemId: ID!): List
         editItem(listId: ID!, itemId: ID!, name: String, description: String): Item
         buyItem(listId: ID!, itemId: ID!): List 
-        addList(name: String!, description: String!): User       
+        addList(name: String!, description: String!): List
         deleteList(listId: ID!): List
         duplicateList(listId: ID!): List
         shareListWithFriend(listId: ID!, friendUsername: String!): List
