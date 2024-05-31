@@ -1,12 +1,13 @@
 // sourced from https://v2.chakra-ui.com/docs/hooks/use-disclosure
 import React from 'react'
-import { Stack, HStack, Input, Button, IconButton, useDisclosure } from '@chakra-ui/react'
+import { Stack, Button, useDisclosure } from '@chakra-ui/react'
 
 
 import SearchUserForm from './SearchUserForm';
 
-export default function ShareListButton({onClickSearch}) {
+export default function ShareListButton({listId}) {
     const { getDisclosureProps, getButtonProps } = useDisclosure();
+    // console.log(listId);
   
     const buttonProps = getButtonProps()
     const disclosureProps = getDisclosureProps()
@@ -15,7 +16,7 @@ export default function ShareListButton({onClickSearch}) {
             <Button {...buttonProps} colorScheme='blue' size="sm">Share</Button>
             <SearchUserForm
                 disclosureProps={disclosureProps}
-                handleFormSubmit={onClickSearch}
+                listId={listId}
             />
       </Stack>
     )

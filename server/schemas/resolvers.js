@@ -17,6 +17,7 @@ const resolvers = {
         },
 
         userByEmail: async (parent, { email }) => {
+            console.log(email);
             return await User.findOne({ email });
         },
 

@@ -27,7 +27,7 @@ export default function Header() {
           />
           <Box fontSize="2xl" fontWeight="bold" color={color}>ShopMate!</Box>
         </HStack>
-        <HStack as={'nav'} spacing={4} alignItems={'center'}>
+        <HStack as={'nav'} spacing={1} alignItems={'center'}>
           <Link to="/">
             <Button variant="ghost" color={color}>Home</Button>
           </Link>

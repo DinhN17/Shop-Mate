@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import { Heading, VStack } from '@chakra-ui/react';
 
 import ItemList from "../components/ItemList";
 
@@ -23,10 +24,10 @@ const SharedList = () => {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
     return (
-        <div>
-            <h1>{data.list.name}</h1>
+        <VStack>
+            <Heading as='h2' size='2xl'>{data.list.name}</Heading>
             <ItemList items={data.list.items} listId={listId} />
-        </div>
+        </VStack>
     );
 };
 
