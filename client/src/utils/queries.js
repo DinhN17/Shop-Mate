@@ -17,6 +17,7 @@ export const GET_LISTS_BY_ME = gql`
                 name
                 description
                 owner
+                members
             }
         }
     }
@@ -39,6 +40,7 @@ export const GET_LIST = gql`
         list(listId: $id) {
             name
             owner
+            members
             updatedAt
             items {
                 name

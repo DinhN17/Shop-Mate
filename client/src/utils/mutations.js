@@ -42,6 +42,7 @@ export const ADD_LIST = gql`
         name
         description
         owner
+        members
       }
   }
 `;
@@ -53,6 +54,7 @@ export const DELETE_LIST = gql`
           name
           owner
           description
+          members
       }
   }
 `;
@@ -64,6 +66,7 @@ export const DUPLICATE_LIST = gql`
           name
           owner
           description
+          members
       }
   }
 `;

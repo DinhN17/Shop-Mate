@@ -100,6 +100,7 @@ export default function ShoppingList({lists}) {
               <Heading as='h3' size='lg'>Name: {list.name}.</Heading>
               </ChakraLink>
               <h4>Created by: {list.owner}</h4>
+              <h4>Members: {list.members.join(', ')}</h4>
               <h4>Description: {list.description}</h4>
               <Stack direction='row' spacing={4} align='start' justify ='center'>
                 <ShareListButton listId={list._id} />
