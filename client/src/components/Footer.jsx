@@ -9,14 +9,15 @@ const Footer = () => {
   return (
     <footer>
       <Flex
-        direction="column"
+        direction={{ base: 'column', md: 'row' }} // Flex direction changes based on screen size
         align="center"
+        justify="space-between" // Horizontal alignment changes based on screen size
         paddingY={4}
         paddingX={8}
         bg={bg}
         color={color}
       >
-        <Flex mb={2}>
+        <Flex mb={{ base: 2, md: 0 }}> {/* Margin bottom changes based on screen size */}
           <Link href="https://github.com" isExternal mx={2}>
             <Icon as={FaGithub} fontSize="2xl" />
           </Link>
