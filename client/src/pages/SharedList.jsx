@@ -1,8 +1,9 @@
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { Heading, VStack } from '@chakra-ui/react';
+import { Heading, VStack, Text } from '@chakra-ui/react';
 
+import EditableText from '../components/EditableText';
 import ItemList from "../components/ItemList";
 
 import { GET_LIST } from "../utils/queries";
@@ -25,7 +26,16 @@ const SharedList = () => {
     if (error) return <p>Error :(</p>;
     return (
         <VStack>
-            <Heading as='h2' size='2xl'>{data.list.name}</Heading>
+            <Heading as='h2' size='2xl'>
+                <EditableText
+                    text={data.list.name}
+                    textAlign={"center"}
+                />
+            </Heading>
+            <EditableText
+                text={data.list.description}
+                textAlign={"center"}
+            />
             <ItemList items={data.list.items} listId={listId} />
         </VStack>
     );

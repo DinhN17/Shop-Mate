@@ -39,6 +39,7 @@ export const GET_LIST = gql`
     query getList($id: ID!) {
         list(listId: $id) {
             name
+            description
             owner
             members
             updatedAt
@@ -49,7 +50,6 @@ export const GET_LIST = gql`
                 addedBy
                 _id
             }
-            description
         }
     }
 `

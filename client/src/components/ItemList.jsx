@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Container, SimpleGrid, Image, Text, Button, Flex, Stack, VStack, layout } from '@chakra-ui/react';
+import { Box, Heading, SimpleGrid, Image, Text, Button, Flex, Stack, VStack, layout } from '@chakra-ui/react';
 import { useMutation } from '@apollo/client';
 import { REMOVE_ITEM, EDIT_ITEM, BUY_ITEM, ADD_ITEM } from '../utils/mutations';
 import { GET_LIST } from '../utils/queries';
 import Auth from '../utils/auth';
 
 import AddingButton from "../components/AddingButton";
+import EditableText from '../components/EditableText';
 
 const ItemsList = ({ items, listId }) => {
   const [removeItem] = useMutation(REMOVE_ITEM, {
@@ -84,8 +85,16 @@ const ItemsList = ({ items, listId }) => {
         {Auth.loggedIn() && items &&
           items.map((item) => (
             <Box bg="gray.50" p={4} borderRadius="md" textAlign="center" key={item._id}>
-              <h4>Name: {item.name}.</h4>  
-              <p>Description: {item.description}</p>
+              <Heading as='h4' size='md'>
+                <EditableText
+                  text={item.name}
+                  textAlign={"center"}
+                />
+              </Heading>
+              <EditableText
+                text={item.description}
+                textAlign={"center"}
+              />
               <h3>Created by: {item.addedBy}</h3>
               {/* Buy button */}
               {item.boughtBy && <h4>Bought by: {item.boughtBy}</h4>}
