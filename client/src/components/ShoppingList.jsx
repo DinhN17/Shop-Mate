@@ -3,7 +3,7 @@ import { Link as ChakraLink } from '@chakra-ui/react'
 
 import { Fade, ScaleFade, Slide, SlideFade, Collapse, useDisclosure } from '@chakra-ui/react'
 
-import { Box, Container, SimpleGrid, Image, Text, Button, VStack, Stack } from '@chakra-ui/react';
+import { Box, Heading, SimpleGrid, Image, Text, Button, VStack, Stack } from '@chakra-ui/react';
 import ShareListButton from './ShareListButton';
 import AddingButton from "../components/AddingButton";
 import { useMutation, useQuery } from '@apollo/client';
@@ -48,14 +48,14 @@ export default function ShoppingList({lists}) {
       }
   };
   // SHare List
-  const searchUserByEmail = async (event) => {
-    console.log(event.target[0].value);
-    const { data } = await useQuery(GET_USERNAME_BY_EMAIL, 
-      { variables: { email: event.target[0].value } });
+  // const searchUserByEmail = async (event) => {
+  //   console.log(event.target[0].value);
+  //   const { data } = await useQuery(GET_USERNAME_BY_EMAIL, 
+  //     { variables: { email: event.target[0].value } });
 
-    console.log(data);
-    const searchResult = data?.userByEmail.username || null;
-  };
+  //   console.log(data);
+  //   const searchResult = data?.userByEmail.username || null;
+  // };
   
   // Duplicate List
   const handleDuplicateList = async (listId) => {
@@ -97,12 +97,13 @@ export default function ShoppingList({lists}) {
           lists.map((list) => (
             <Box bg="gray.50" p={4} borderRadius="md" textAlign="center" key={list._id}>
               <ChakraLink as={ReactRouterLink} to={`/lists/${list._id}`}>
-                Name: {list.name}.
+              <Heading as='h3' size='lg'>Name: {list.name}.</Heading>
               </ChakraLink>
               <h4>Created by: {list.owner}</h4>
+              <h4>Members: {list.members.join(', ')}</h4>
               <h4>Description: {list.description}</h4>
               <Stack direction='row' spacing={4} align='start' justify ='center'>
-                <ShareListButton onClickSearch={searchUserByEmail} />
+                <ShareListButton listId={list._id} />
                 <Button 
                   colorScheme="teal" 
                   size="sm"

@@ -17,6 +17,7 @@ const resolvers = {
         },
 
         userByEmail: async (parent, { email }) => {
+            console.log(email);
             return await User.findOne({ email });
         },
 
@@ -247,10 +248,12 @@ const resolvers = {
                 items.map(item => item.boughtBy = null);
                 // update owner
                 owner = context.user.username;
+                // update members
+                members = [context.user.username];
                 // update name
                 name = `${name} - Copy`;
                 // create new list
-                const newList = await List.create({name, description, owner, items});
+                const newList = await List.create({name, description, owner, members, items});
                 // update user information
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
@@ -288,7 +291,7 @@ const resolvers = {
                     { new: true }
                 );
 
-                // update user information, in future it should be get confirm from friend
+                // update friend information, in future it should be get confirm from friend
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: friend._id },
                     { $addToSet: { memberedLists: listId } },
