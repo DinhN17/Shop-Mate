@@ -124,7 +124,7 @@ const Home = () => {
                                 <Image
                                     borderRadius="full"
                                     boxSize="150px"
-                                    src="https://via.placeholder.com/150"
+                                    src="/Dinh.png"
                                     alt="Team Member 1"
                                     mx="auto"
                                 />
