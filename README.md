@@ -1,14 +1,20 @@
-# Shop-Mate
+# Welcome to ShopMate!
 
-## Description
+ShopMate is your ultimate solution for simplified shopping experiences. Designed to cater to individuals and groups, our collaborative shopping list application wil revolutionise the way you organise your shopping needs. 
 
-The challenge for this assignment was to create our first full-stack application using the MERN stack from the ground up as a group. Ultimately, what we ended up creating is a website where users can create various types of lists for shopping, checking off tasks, and anything else they need to organize. Users are also able to share and collaborate on lists together to work towards completing tasks. This would be a great application for housemates, families, and project groups to stay organized and ahead of tasks. Our motivation for creating this application was to help users easily stay organized throughout projects and shopping lists, ensuring items don't get purchased twice.
+Are you tired of juggling multiple shopping lists and forgetting essential items? With ShopMate, say goodbye to the hassle and hello to seamless organisation. Whether you're a busy professional, a parent on-the-go, or simply someone who wants to make shopping easier, ShopMate is here to streamline your shopping process.
 
+Our platform allows you to create and share shopping lists effortlessly. Collaborate with family members, roommates, or friends in real-time, ensuring that everyone stays in sync. No more last-minute trips to the store or forgotten items left behind.
+
+ShopMate prioritises simplicity and convenience, offering an intuitive user interface that's easy to navigate. Whether you're using a smartphone, tablet, or computer, access your shopping lists anytime, anywhere.
+
+Experience stress-free shopping list organisation with ShopMate. Say goodbye to forgotten items and hello to efficient, coordinated shopping. Join us today and make shopping a breeze!
+
+# Project Requirements
 Throughout this project, we applied the knowledge gained from the Adelaide University Web Development boot camp. We utilized the MERN stack, using Mongoose for our database, Express for our server, React for our front end, and Node for our backend. To create a beautiful and sleek user interface, we used Chakra UI, a React component library. Additionally, we implemented Stripe, a payment API, to add more functionality to our project.
 
-
-Live Link: ADD LINK
-
+Github Repository: https://github.com/DinhN17/Shop-Mate
+Live Link:  https://limitless-meadow-75906-eea46bc8be0c.herokuapp.com/
 
 ## Table of Contents 
 
