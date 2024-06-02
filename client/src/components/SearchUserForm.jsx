@@ -10,7 +10,7 @@ export default function SearchUserForm({ disclosureProps, listId }) {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState('');
     // const [resultState, setResultState] = useState('');
-    console.log(listId);
+    // console.log(listId);
     
     const client = useApolloClient();
     // const { data, loading, error } = useQuery(GET_USERNAME_BY_EMAIL, {

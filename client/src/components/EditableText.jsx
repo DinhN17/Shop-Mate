@@ -9,10 +9,23 @@ import {
     Input
   } from '@chakra-ui/react';
 import { CheckIcon, CloseIcon, EditIcon } from '@chakra-ui/icons';
+import { useState } from 'react';
 
 
 // export default function EditableText({ text, textAlign, fontSize, handleSaveButton }) {
-export default function EditableText({ text, textAlign, fontSize }) {
+export default function EditableText({ text, textAlign, fontSize, handleSaveButton, handleSaveButtonProps }) {
+    
+    const [update, setUpdate] = useState('');
+
+    const onChangeHandler = (event) => {
+        setUpdate(event.target.value);
+    };
+
+    const submitButtonHandler = async () => {
+        await handleSaveButton(update, handleSaveButtonProps);
+        setUpdate('');
+    };
+
     const EditableControls = () => {
         const {
             isEditing,
@@ -20,14 +33,14 @@ export default function EditableText({ text, textAlign, fontSize }) {
             getCancelButtonProps,
             getEditButtonProps
         } = useEditableControls();
-        
+
         return isEditing ? (
             <span>
                 <ButtonGroup size="sm">
                     <IconButton 
                         icon={<CheckIcon />} 
                         {...getSubmitButtonProps()}
-                        // onClick={handleSaveButton} 
+                        onClick={submitButtonHandler} 
                     />
                     <IconButton 
                         icon={<CloseIcon />} 
@@ -54,7 +67,9 @@ export default function EditableText({ text, textAlign, fontSize }) {
             isPreviewFocusable
         >
             <EditablePreview />
-            <Input as={EditableInput} />
+            <Input as={EditableInput} 
+                onChange={onChangeHandler}
+            />
             <EditableControls />
         </Editable>
     );
