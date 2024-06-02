@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Flex, Box, HStack, Button, Image, Menu, MenuButton, MenuList, MenuItem, IconButton, useBreakpointValue } from '@chakra-ui/react';
+import { Link, useLocation } from 'react-router-dom';
+import { Flex, Box, HStack, Button, Image, Menu, MenuButton, MenuList, MenuItem, IconButton, useBreakpointValue, } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 
 import Auth from '../utils/auth';
@@ -15,11 +15,12 @@ export default function Header() {
   };
 
   const isMobile = useBreakpointValue({ base: true, md: false });
+  const location = useLocation();
 
   return (
     <Box bg={bg} px={4}>
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-        <HStack spacing={2} alignItems="center">
+        <HStack as="a" href="/" spacing={2} alignItems="center">
           <Image
             src="/wishlist.png"
             alt="ShopMate Icon"
@@ -37,7 +38,9 @@ export default function Header() {
               _hover={{ bg: 'gray.700' }}
             />
             <MenuList>
-              <MenuItem as={Link} to="/">Home</MenuItem>
+            {location.pathname !== '/' && (
+                <MenuItem as={Link} to="/">Home</MenuItem>
+              )}
               <MenuItem as={Link} to="/dashboard">Dashboard</MenuItem>
               <MenuItem as={Link} to="/donation">Donation</MenuItem>
               {Auth.loggedIn() ? (

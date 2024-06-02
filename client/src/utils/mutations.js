@@ -47,6 +47,30 @@ export const ADD_LIST = gql`
   }
 `;
 
+export const UPDATE_LIST_NAME = gql`
+  mutation updateListName($id: ID!, $name: String!) {
+      editList(listId: $id, name: $name) {
+          _id
+          name
+          description
+          owner
+          members
+      }
+  }
+`;
+
+export const UPDATE_LIST_DESCRIPTION = gql`
+  mutation updateListDescription($id: ID!, $description: String!) {
+      editList(listId: $id, description: $description) {
+          _id
+          name
+          description
+          owner
+          members
+      }
+  }
+`;
+
 export const DELETE_LIST = gql`
   mutation deleteList($listId: ID!) {
       deleteList(listId: $listId) {

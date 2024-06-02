@@ -1,6 +1,4 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Box, Heading, SimpleGrid, Image, Text, Button, Flex, Stack, VStack, layout } from '@chakra-ui/react';
+import { Box, Heading, SimpleGrid, Button, Stack, VStack } from '@chakra-ui/react';
 import { useMutation } from '@apollo/client';
 import { REMOVE_ITEM, EDIT_ITEM, BUY_ITEM, ADD_ITEM } from '../utils/mutations';
 import { GET_LIST } from '../utils/queries';
@@ -22,6 +20,8 @@ const ItemsList = ({ items, listId }) => {
     refetchQueries: [{ query: GET_LIST, variables: { id: listId } }]
   });
 
+  const [editItem] = useMutation(EDIT_ITEM);
+
   const handleAddItemSubmit = async (event) => {
     try {
       const { data } = await addItem({
@@ -31,7 +31,6 @@ const ItemsList = ({ items, listId }) => {
           description: event.target[1].value 
         }
       });
-      console.log(data);
     } catch (err) {
       console.error(err);
     }
@@ -47,19 +46,31 @@ const ItemsList = ({ items, listId }) => {
     }
   };
 
-  const handleEditItem = async (itemId, name, description) => {
-    // try {
-    //   await editItem({
-    //     variables: { listId, itemId, name, description }
-    //   });
-    // } catch (err) {
-    //   console.error(err);
-    // }
+  const handleUpdateItemName = async (name, {listId, itemId}) => {
+    try {
+      const { data } = await editItem({
+        variables: { listId, itemId, name }
+      });
+    } catch (err) {
+      console.error(err);
+    }
+    window.location.reload(); // workaround solution, need to study more
+  };
+
+  const handleUpdateItemDescription = async (description, {listId, itemId}) => {
+    try {
+      const { data } = await editItem({
+        variables: { listId, itemId, description }
+      });
+    } catch (err) {
+      console.error(err);
+    }
+    window.location.reload(); // workaround solution, need to study more
   };
 
   const handleBuyItem = async (itemId, listId) => {
     try {
-      await buyItem({
+      const { data } = await buyItem({
         variables: {
           listId,
           itemId,
@@ -89,23 +100,20 @@ const ItemsList = ({ items, listId }) => {
                 <EditableText
                   text={item.name}
                   textAlign={"center"}
+                  handleSaveButton={handleUpdateItemName}
+                  handleSaveButtonProps={{ listId, itemId: item._id }}
                 />
               </Heading>
               <EditableText
                 text={item.description}
                 textAlign={"center"}
+                handleSaveButton={handleUpdateItemDescription}
+                handleSaveButtonProps={{ listId, itemId: item._id }}
               />
               <h3>Created by: {item.addedBy}</h3>
               {/* Buy button */}
               {item.boughtBy && <h4>Bought by: {item.boughtBy}</h4>}
               <Stack direction='row' spacing={4} align='center' justify ='center'>
-                <Button 
-                  colorScheme="blue" 
-                  size="sm" 
-                  onClick={() => handleEditItem(item._id, item.name, item.description)}
-                >
-                  Edit
-                </Button>
                 <Button 
                   colorScheme="teal" 
                   size="sm"

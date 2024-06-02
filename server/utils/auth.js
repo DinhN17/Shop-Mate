@@ -13,7 +13,7 @@ module.exports = {
 
     signToken: function ({ email, username, _id }) {
         const payload = { email, username, _id };
-        // console.log("payload",payload);
+        // // console.log("payload",payload);
         return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
     },
     authMiddleware: function ({ req }) {
@@ -29,13 +29,13 @@ module.exports = {
         
         try {
           const { data } = jwt.verify(token, secret, { maxAge: expiration });
-          // console.log("authenticatedPerson", data);
+          // // console.log("authenticatedPerson", data);
           req.user = data;
         } catch {
-          console.log('Invalid token');
+          // console.log('Invalid token');
         }
     
-        // console.log("req.user", req.user);
+        // // console.log("req.user", req.user);
         return req;
     },
 };
