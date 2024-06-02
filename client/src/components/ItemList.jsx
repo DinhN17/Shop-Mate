@@ -22,6 +22,8 @@ const ItemsList = ({ items, listId }) => {
     refetchQueries: [{ query: GET_LIST, variables: { id: listId } }]
   });
 
+  const [editItem] = useMutation(EDIT_ITEM);
+
   const handleAddItemSubmit = async (event) => {
     try {
       const { data } = await addItem({
@@ -47,14 +49,36 @@ const ItemsList = ({ items, listId }) => {
     }
   };
 
-  const handleEditItem = async (itemId, name, description) => {
-    // try {
-    //   await editItem({
-    //     variables: { listId, itemId, name, description }
-    //   });
-    // } catch (err) {
-    //   console.error(err);
-    // }
+  // const handleEditItem = async (itemId, name, description) => {
+  //   // try {
+  //   //   await editItem({
+  //   //     variables: { listId, itemId, name, description }
+  //   //   });
+  //   // } catch (err) {
+  //   //   console.error(err);
+  //   // }
+  // };
+
+  const handleUpdateItemName = async (name, {listId, itemId}) => {
+    try {
+      await editItem({
+        variables: { listId, itemId, name }
+      });
+    } catch (err) {
+      console.error(err);
+    }
+    window.location.reload(); // workaround solution, need to study more
+  };
+
+  const handleUpdateItemDescription = async (description, {listId, itemId}) => {
+    try {
+      await editItem({
+        variables: { listId, itemId, description }
+      });
+    } catch (err) {
+      console.error(err);
+    }
+    window.location.reload(); // workaround solution, need to study more
   };
 
   const handleBuyItem = async (itemId, listId) => {
@@ -89,23 +113,27 @@ const ItemsList = ({ items, listId }) => {
                 <EditableText
                   text={item.name}
                   textAlign={"center"}
+                  handleSaveButton={handleUpdateItemName}
+                  handleSaveButtonProps={{ listId, itemId: item._id }}
                 />
               </Heading>
               <EditableText
                 text={item.description}
                 textAlign={"center"}
+                handleSaveButton={handleUpdateItemDescription}
+                handleSaveButtonProps={{ listId, itemId: item._id }}
               />
               <h3>Created by: {item.addedBy}</h3>
               {/* Buy button */}
               {item.boughtBy && <h4>Bought by: {item.boughtBy}</h4>}
               <Stack direction='row' spacing={4} align='center' justify ='center'>
-                <Button 
+                {/* <Button 
                   colorScheme="blue" 
                   size="sm" 
                   onClick={() => handleEditItem(item._id, item.name, item.description)}
                 >
                   Edit
-                </Button>
+                </Button> */}
                 <Button 
                   colorScheme="teal" 
                   size="sm"

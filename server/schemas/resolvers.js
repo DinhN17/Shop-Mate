@@ -178,7 +178,7 @@ const resolvers = {
             if (context.user.username) { 
 
                 const owner = context.user.username;
-                const list = await List.create({name, description, owner});
+                const list = await List.create({name, description, owner, members: [owner] });
                 console.log(list);
                 // update new list to user information
                 if (!list) {
@@ -205,6 +205,85 @@ const resolvers = {
             };
             
         },
+
+        // editList: edit a list
+        editList: async (parent, { listId, name, description }, context) => {
+            if (context.user.username) {
+                console.log("edit list", listId, name, description);
+                if (name && !description) {
+                    console.log("edit name");
+                    const updatedList = await List.findOneAndUpdate(
+                        { _id: listId },
+                        { name: name },
+                        { new: true }
+                    );
+                    if (!updatedList) {
+                        throw new Error("list not found");
+                    };
+                    return updatedList;
+                };
+
+                if (!name && description) {
+                    console.log("edit description");
+                    const updatedList = await List.findOneAndUpdate(
+                        { _id: listId },
+                        { description: description },
+                        { new: true }
+                    );
+                    if (!updatedList) {
+                        throw new Error("list not found");
+                    };
+                    return updatedList;
+                };
+                console.log("edit both");
+            };
+        },
+
+        //editItem
+        editItem: async (parent, { listId, itemId, name, description }, context) => {
+
+            if (context.user.username) {
+
+                if (name && !description) {
+                    const updatedList = await List.updateOne(
+                        { _id: listId, 'items._id': itemId },
+                        { $set: { 'items.$.name': name } },
+                        { new: true }
+                    );
+                    if (!updatedList) {
+                        throw new Error("list not found");
+                    };
+                    return updatedList;
+                };
+
+                if (!name && description) {
+                    const updatedList = await List.updateOne(
+                        { _id: listId, 'items._id': itemId },
+                        { $set: { 'items.$.description': description } },
+                        { new: true }
+                    );
+                    if (!updatedList) {
+                        throw new Error("list not found");
+                    };
+                    return updatedList;
+                };
+            }
+        },
+
+        // editListDescription: async (parent, { listId, description }, context) => {
+        //     if (context.user.username) {
+        //         const updatedList = await List.findOneAndUpdate(
+        //             { _id: listId },
+        //             { description: description },
+        //             { new: true }
+        //         );
+        //         if (!updatedList) {
+        //             throw new Error("list not found");
+        //         };
+        //         return updatedList;
+        //     };
+        // },
+
 
         deleteList: async (parent, { listId }, context) => {
             if (context.user.username) {

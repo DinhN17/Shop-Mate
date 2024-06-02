@@ -56,6 +56,7 @@ const typeDefs = `
         editItem(listId: ID!, itemId: ID!, name: String, description: String): Item
         buyItem(listId: ID!, itemId: ID!): List 
         addList(name: String!, description: String!): List
+        editList(listId: ID!, name: String, description: String): List
         deleteList(listId: ID!): List
         duplicateList(listId: ID!): List
         shareListWithFriend(listId: ID!, friendUsername: String!): List
