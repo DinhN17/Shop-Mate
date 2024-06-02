@@ -20,8 +20,7 @@ export default function Header() {
   return (
     <Box bg={bg} px={4}>
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-      <Link href="/Home">
-        <HStack as="a" spacing={2} alignItems="center">
+        <HStack as="a" href="/" spacing={2} alignItems="center">
           <Image
             src="/wishlist.png"
             alt="ShopMate Icon"
@@ -29,7 +28,6 @@ export default function Header() {
           />
           <Box fontSize="2xl" fontWeight="bold" color={color}>ShopMate!</Box>
         </HStack>
-      </Link>
         {isMobile ? (
           <Menu>
             <MenuButton
