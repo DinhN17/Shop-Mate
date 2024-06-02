@@ -1,4 +1,4 @@
-const { PiUserBold } = require('react-icons/pi');
+
 const { User, List } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
@@ -17,26 +17,26 @@ const resolvers = {
         },
 
         userByEmail: async (parent, { email }) => {
-            console.log(email);
+            // console.log(email);
             return await User.findOne({ email });
         },
 
         listsByUser: async (parent, { username }) => {
             const data = await User.findOne({ username }).populate('ownedLists').populate('memberedLists');
             
-            // console.log(lists);
+            // // console.log(lists);
             return data.ownedLists.concat(data.memberedLists);
         },
 
         listsOwnedByUser: async (parent, { username }) => {
             const lists = await User.findOne({ username }).populate('ownedLists');
-            // console.log(lists.ownedLists);
+            // // console.log(lists.ownedLists);
             return lists.ownedLists;
         },
 
         listsMemberedByUser: async (parent, { username }) => {
             const lists = await User.findOne({ username }).populate('memberedLists');
-            // console.log(lists);
+            // // console.log(lists);
             return lists.memberedLists;
         },
 
@@ -50,7 +50,7 @@ const resolvers = {
 
         // query me: get information of the logged in user
         me: async (parent, args, context) => {
-            // console.log("context", context.user);
+            // // console.log("context", context.user);
             
             if (context.user) {
                 const user = await User.findOne({ _id: context.user._id }).populate('memberedLists');
@@ -139,17 +139,17 @@ const resolvers = {
         // Add Item to List
         addItem: async (parent, { listId, name, description }, context) => {
 
-            console.log("add item", listId);
+            // console.log("add item", listId);
             // check if user is logged in
             if (context.user) {
-                console.log("check", context.user.username);
+                // console.log("check", context.user.username);
                 // check if the user is a member of the list
                 const list = await List.findOneAndUpdate(
                     { _id: listId },
                     { $addToSet: { items: { name: name, description: description, addedBy: context.user.username } } },
                     { new: true }
                 );
-                console.log("list", list);
+                // console.log("list", list);
                 if (!list) {
                     throw new Error("list not found");
                 };
@@ -158,8 +158,8 @@ const resolvers = {
                 //     throw new Error("user not authorized");
                 // };
 
-                // console.log("check", list.members);
-                // console.log(name, description, context.user.username);
+                // // console.log("check", list.members);
+                // // console.log(name, description, context.user.username);
 
                 // add the item to the list
                 // const List = await List.updateOne(
@@ -168,7 +168,7 @@ const resolvers = {
                 //     { new: true }
                 // );
 
-                // console.log(List);
+                // // console.log(List);
                 return List;
             }
         },
@@ -179,7 +179,7 @@ const resolvers = {
 
                 const owner = context.user.username;
                 const list = await List.create({name, description, owner, members: [owner] });
-                console.log(list);
+                // console.log(list);
                 // update new list to user information
                 if (!list) {
                     throw new Error("list failed to create");
@@ -196,7 +196,7 @@ const resolvers = {
                     { new: true }
                 );
 
-                // console.log(updatedUser);
+                // // console.log(updatedUser);
 
                 if (!updatedUser) {
                     throw new Error("user not found");
@@ -209,9 +209,9 @@ const resolvers = {
         // editList: edit a list
         editList: async (parent, { listId, name, description }, context) => {
             if (context.user.username) {
-                console.log("edit list", listId, name, description);
+                // console.log("edit list", listId, name, description);
                 if (name && !description) {
-                    console.log("edit name");
+                    // console.log("edit name");
                     const updatedList = await List.findOneAndUpdate(
                         { _id: listId },
                         { name: name },
@@ -224,7 +224,7 @@ const resolvers = {
                 };
 
                 if (!name && description) {
-                    console.log("edit description");
+                    // console.log("edit description");
                     const updatedList = await List.findOneAndUpdate(
                         { _id: listId },
                         { description: description },
@@ -235,7 +235,7 @@ const resolvers = {
                     };
                     return updatedList;
                 };
-                console.log("edit both");
+                // console.log("edit both");
             };
         },
 

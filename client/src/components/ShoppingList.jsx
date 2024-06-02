@@ -1,24 +1,21 @@
 import { Link as ReactRouterLink } from 'react-router-dom'
 import { Link as ChakraLink } from '@chakra-ui/react'
 
-import { Fade, ScaleFade, Slide, SlideFade, Collapse, useDisclosure } from '@chakra-ui/react'
+import { useDisclosure } from '@chakra-ui/react'
 
-import { Box, Heading, SimpleGrid, Image, Text, Button, VStack, Stack } from '@chakra-ui/react';
+import { Box, Heading, SimpleGrid, Button, VStack, Stack } from '@chakra-ui/react';
 import ShareListButton from './ShareListButton';
-import AddingButton from "../components/AddingButton";
-import { useMutation, useQuery } from '@apollo/client';
+import AddingButton from "./AddingButton";
+import { useMutation } from '@apollo/client';
 
 import { DELETE_LIST, DUPLICATE_LIST, ADD_LIST } from '../utils/mutations';
-import { GET_LISTS_BY_ME, GET_USERNAME_BY_EMAIL } from '../utils/queries';
+import { GET_LISTS_BY_ME } from '../utils/queries';
 
 export default function ShoppingList({lists}) {
 
   // Toggle for Share button
   const { getDisclosureProps, getButtonProps } = useDisclosure()
-  const buttonProps = getButtonProps()
-  const disclosureProps = getDisclosureProps()
-
-  // handleAddListSubmit
+  
   const [addList] = useMutation(ADD_LIST, {
     refetchQueries: [{ query: GET_LISTS_BY_ME }]
   });
@@ -42,24 +39,14 @@ export default function ShoppingList({lists}) {
                   description: event.target[1].value
               }
           });
-          // console.log(data);
       } catch (err) {
           console.error(err);
       }
   };
-  // SHare List
-  // const searchUserByEmail = async (event) => {
-  //   console.log(event.target[0].value);
-  //   const { data } = await useQuery(GET_USERNAME_BY_EMAIL, 
-  //     { variables: { email: event.target[0].value } });
 
-  //   console.log(data);
-  //   const searchResult = data?.userByEmail.username || null;
-  // };
-  
   // Duplicate List
   const handleDuplicateList = async (listId) => {
-    // console.log(list);
+    // // console.log(list);
     try {
       const { data } = await duplicateList({
         variables: { listId },
@@ -70,7 +57,6 @@ export default function ShoppingList({lists}) {
   };
 
   const handleDeleteList = async (listId) => {
-    // console.log(list);
     try {
       const { data } = await deleteList({
         variables: { listId },
@@ -82,7 +68,6 @@ export default function ShoppingList({lists}) {
 
   return (
     <VStack>
-      {/* <AddShoppingListForm /> */}
       <AddingButton
       addingButtonLabel="Add a new shopping list"
       submitButtonName="OK"

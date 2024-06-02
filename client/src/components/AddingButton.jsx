@@ -1,6 +1,6 @@
 // sourced from https://v2.chakra-ui.com/docs/hooks/use-disclosure
-import React from 'react'
-import { Stack, HStack, Input, Button, IconButton, useDisclosure } from '@chakra-ui/react'
+// import React from 'react'
+import { Stack, Button, useDisclosure } from '@chakra-ui/react'
 
 
 import AddingFormWith2Inputs from './AddingFormWith2Inputs';

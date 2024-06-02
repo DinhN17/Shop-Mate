@@ -1,45 +1,26 @@
-import { Text, HStack, VStack, Input, Button, IconButton, useDisclosure } from '@chakra-ui/react'
+import { Text, HStack, VStack, Input, Button, IconButton } from '@chakra-ui/react'
 import { SearchIcon } from '@chakra-ui/icons'
 
 import { useState } from 'react'
-import { useQuery, useMutation, useLazyQuery, useApolloClient } from '@apollo/client';
+import { useMutation, useApolloClient } from '@apollo/client';
 import { GET_USERNAME_BY_EMAIL } from '../utils/queries';
 import { SHARE_LIST_WITH_FRIEND } from '../utils/mutations';
 
 export default function SearchUserForm({ disclosureProps, listId }) {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState('');
-    // const [resultState, setResultState] = useState('');
-    // console.log(listId);
     
     const client = useApolloClient();
-    // const { data, loading, error } = useQuery(GET_USERNAME_BY_EMAIL, {
-    //     variables: { email: searchValue },
-    // });
-
+    
     const [shareListWithFriend] = useMutation(SHARE_LIST_WITH_FRIEND);
 
-    // let searchResult;
-    // let sValue;
-    // if (data !== undefined && data !== null) {
-    //     if (loading) { searchResult = 'Loading User...' }
-    
-    //     if (error) { searchResult = `Error Occur: ${error}` }
-    
-    //     searchResult = data.userByEmail;
-    // };
-
     const handleSearchSubmit = async (event) => {
-        // setSearchValue(sValue);
-        console.log(searchValue);
-        console.log(event.target.value);
         event.preventDefault();
         try {
             const { data } = await client.query({
                 query: GET_USERNAME_BY_EMAIL,
                 variables: { email: searchValue },
             })
-            console.log(data.userByEmail);
             setSearchResult(data.userByEmail.username);
         } catch (error) {
             console.error(error);

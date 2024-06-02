@@ -11,8 +11,6 @@ import {
 import { CheckIcon, CloseIcon, EditIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 
-
-// export default function EditableText({ text, textAlign, fontSize, handleSaveButton }) {
 export default function EditableText({ text, textAlign, fontSize, handleSaveButton, handleSaveButtonProps }) {
     
     const [update, setUpdate] = useState('');
@@ -67,12 +65,10 @@ export default function EditableText({ text, textAlign, fontSize, handleSaveButt
             isPreviewFocusable
         >
             <EditablePreview />
-            <Input as={EditableInput} 
+            <Input as={EditableTextarea} 
                 onChange={onChangeHandler}
             />
             <EditableControls />
         </Editable>
     );
 };
-
-// export default EditableText;

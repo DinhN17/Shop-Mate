@@ -1,6 +1,4 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Box, Heading, SimpleGrid, Image, Text, Button, Flex, Stack, VStack, layout } from '@chakra-ui/react';
+import { Box, Heading, SimpleGrid, Button, Stack, VStack } from '@chakra-ui/react';
 import { useMutation } from '@apollo/client';
 import { REMOVE_ITEM, EDIT_ITEM, BUY_ITEM, ADD_ITEM } from '../utils/mutations';
 import { GET_LIST } from '../utils/queries';
@@ -33,7 +31,6 @@ const ItemsList = ({ items, listId }) => {
           description: event.target[1].value 
         }
       });
-      console.log(data);
     } catch (err) {
       console.error(err);
     }
@@ -49,19 +46,9 @@ const ItemsList = ({ items, listId }) => {
     }
   };
 
-  // const handleEditItem = async (itemId, name, description) => {
-  //   // try {
-  //   //   await editItem({
-  //   //     variables: { listId, itemId, name, description }
-  //   //   });
-  //   // } catch (err) {
-  //   //   console.error(err);
-  //   // }
-  // };
-
   const handleUpdateItemName = async (name, {listId, itemId}) => {
     try {
-      await editItem({
+      const { data } = await editItem({
         variables: { listId, itemId, name }
       });
     } catch (err) {
@@ -72,7 +59,7 @@ const ItemsList = ({ items, listId }) => {
 
   const handleUpdateItemDescription = async (description, {listId, itemId}) => {
     try {
-      await editItem({
+      const { data } = await editItem({
         variables: { listId, itemId, description }
       });
     } catch (err) {
@@ -83,7 +70,7 @@ const ItemsList = ({ items, listId }) => {
 
   const handleBuyItem = async (itemId, listId) => {
     try {
-      await buyItem({
+      const { data } = await buyItem({
         variables: {
           listId,
           itemId,
@@ -127,13 +114,6 @@ const ItemsList = ({ items, listId }) => {
               {/* Buy button */}
               {item.boughtBy && <h4>Bought by: {item.boughtBy}</h4>}
               <Stack direction='row' spacing={4} align='center' justify ='center'>
-                {/* <Button 
-                  colorScheme="blue" 
-                  size="sm" 
-                  onClick={() => handleEditItem(item._id, item.name, item.description)}
-                >
-                  Edit
-                </Button> */}
                 <Button 
                   colorScheme="teal" 
                   size="sm"
