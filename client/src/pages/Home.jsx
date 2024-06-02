@@ -73,7 +73,44 @@ const Home = () => {
                         <Text as="h2" fontSize="2xl" fontWeight="bold" mb={4}>
                             Available Features
                         </Text>
-                        <Text fontSize={{ base: 'md', md: 'lg' }}>Include list of available features</Text>
+                        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4}>
+                            {/* Feature Card 1 */}
+                            <Box bg="white" p={4} borderRadius="md" boxShadow="md" textAlign="center">
+                                <Image
+                                    borderRadius="md"
+                                    boxSize="100px"
+                                    src="/Collaborate.png"
+                                    alt="Feature 1"
+                                    mx="auto"
+                                />
+                                <Text mt={2} fontSize="lg" fontWeight="bold">Sharing and Collaboration</Text>
+                                <Text mt={2}> Include sharing and collaboration features that allow users to share their lists with family members or friends and collaborate on shopping tasks.</Text>
+                            </Box>
+                            {/* Feature Card 2 */}
+                            <Box bg="white" p={4} borderRadius="md" boxShadow="md" textAlign="center">
+                                <Image
+                                    borderRadius="md"
+                                    boxSize="100px"
+                                    src="/List.jpg"
+                                    alt="Feature 2"
+                                    mx="auto"
+                                />
+                                <Text mt={2} fontSize="lg" fontWeight="bold">Customisable Lists</Text>
+                                <Text mt={2}>Allows users to create multiple lists for different types of shopping lists.</Text>
+                            </Box>
+                            {/* Feature Card 3 */}
+                            <Box bg="white" p={4} borderRadius="md" boxShadow="md" textAlign="center">
+                                <Image
+                                    borderRadius="md"
+                                    boxSize="100px"
+                                    src="/stripe_logo.png"
+                                    alt="Feature 3"
+                                    mx="auto"
+                                />
+                                <Text mt={2} fontSize="lg" fontWeight="bold">API Intergration</Text>
+                                <Text mt={2}>Intergrating Stripe Payment Platform</Text>
+                            </Box>
+                        </SimpleGrid>
                     </Box>
 
                     {/* Meet The Team Section */}
