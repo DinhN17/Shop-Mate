@@ -34,7 +34,7 @@ const Signup = () => {
             return;
         }
 
-        // console.log(formState);
+        console.log(formState);
 
         try {
             const { data } = await createUser({
