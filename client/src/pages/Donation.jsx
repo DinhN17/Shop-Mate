@@ -5,8 +5,6 @@ import { useMutation } from "@apollo/client";
 import {
   Divider,
   Button,
-  Input,
-  HStack,
   Box,
   Text,
   Flex,
@@ -33,9 +31,7 @@ const Donation = () => {
               Our Story
             </Text>
             <Text mt={2} textAlign="center" pb={4}>
-              write story here osjdgtapij asdjgapor jipaerj joaerjtapore
-              jpseortjg poraej gopserjgpo sjre opgj poejsgfsporejgt op osrejtgps
-              rjs oserjtgpos jrpogj pojesrpojt gpeorj
+              This website was developed by us
             </Text>
           </Box>
         </Flex>
@@ -62,30 +58,14 @@ const Donation = () => {
                         <Text fontSize="sm" px={6} py={2} >
                             dkfjaisdogasoidfgjasifgj iahjiaop jpfija ikkawe nioetjiaweojt iopaerjt ioarwjtiorajt iorj ioer
                         </Text>
-                        <Button colorScheme='blue' size='md' m={2} px={10}>
-                            $5
-                        </Button>
-                        <Button colorScheme='blue' size='md' m={2} px={10}>
-                            $10
-                        </Button>
-                        <Button colorScheme='blue' size='md' m={2} px={10}>
-                            $15
-                        </Button>
-                        <Button colorScheme='blue' size='md' m={2} px={10}>
-                            $20
-                        </Button>
                     </Box>
 
                     <Box px={8} pb={4}>
-                        <Text fontSize="sm" textAlign="left" pb={1} fontWeight="bold"> 
-                            Custom Amount:
-                        </Text>
-                        <HStack>
-                        <Input placeholder='Enter Amount' size='md'/>
+                      <a href="https://donate.stripe.com/test_3csaHN10t4Bv2TScMN">
                         <Button colorScheme='blue' size='md' px={10}>
                             Donate Now
-                        </Button>
-                        </HStack>
+                        </Button> 
+                        </a>
                     </Box>
                     </Box>
                 </Box>
