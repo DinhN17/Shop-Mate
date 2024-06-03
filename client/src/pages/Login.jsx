@@ -39,7 +39,7 @@ const Login = () => {
      };
 
   return (
-    <Box px={38} py={5} my={40}>
+    <Box px={30} py={5} my={40}>
         <Card px={10} py={8}>
         <CardHeader >
             <Heading size='md'>Login</Heading>
@@ -86,7 +86,7 @@ const Login = () => {
             )}
             {error && (
             <Text pt="5px">
-              {error.message}
+              Invalid username or password
             </Text>
           )}
         </CardBody>
