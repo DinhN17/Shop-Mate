@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-// import { loadStripe } from '@stripe/stripe-js';
 import { useMutation } from "@apollo/client";
 import {
   Divider,
@@ -11,12 +10,8 @@ import {
   Container,
 } from "@chakra-ui/react";
 
-// const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const Donation = () => {
-
-
-
 
   return (
     <Container>
@@ -31,7 +26,7 @@ const Donation = () => {
               Our Story
             </Text>
             <Text mt={2} textAlign="center" pb={4}>
-              This website was developed by us
+              This website was developed by us to aid peoples organisation, we created a list website to be used for shopping lists, tasks to be done and can even be used for project organisation. our 3 developers, Adelle, Dinh and Sam have worked hard to create a user friendly and practical page for users to utilise. 
             </Text>
           </Box>
         </Flex>
@@ -56,7 +51,48 @@ const Donation = () => {
                   <Box >
                   <Box py={5}>
                         <Text fontSize="sm" px={6} py={2} >
-                            dkfjaisdogasoidfgjasifgj iahjiaop jpfija ikkawe nioetjiaweojt iopaerjt ioarwjtiorajt iorj ioer
+                        <Text mt={2} textAlign="center" pb={4}>
+              Welcome to our list creation site, a project born out of a shared
+              passion for organization and efficiency. Our journey began with a
+              simple idea: to help people streamline their daily tasks, whether
+              it's for shopping, managing to-dos, or organizing projects. We
+              believe that a well-structured list can make life simpler and more
+              productive. 
+              <Text mt={2} textAlign="center" pb={4}> 
+              
+              Our dedicated team of three developers—Adelle, Dinh,
+              and Sam—have poured their expertise and creativity into building
+              this platform. With a focus on user-friendliness and practicality,
+              we've crafted a tool that anyone can use to stay organized and on
+              top of their tasks.
+              
+            </Text>
+
+              <Text mt={2} textAlign="center" pb={4}> 
+              
+              We understand the challenges of juggling
+              multiple responsibilities and the importance of having a reliable
+              system to manage them. That's why we've worked tirelessly to
+              ensure our site is intuitive and efficient, offering features that
+              cater to a variety of needs. 
+              
+            </Text>
+
+            <Text mt={2} textAlign="center" pb={4}> 
+
+              Thank you for choosing our platform.
+              We're excited to be part of your journey towards better
+              organization and productivity. 
+              
+            </Text>
+
+              <Text mt={2} textAlign="center" pb={4}> 
+            
+              Happy listing!
+              
+            </Text>
+
+            </Text>
                         </Text>
                     </Box>
 
