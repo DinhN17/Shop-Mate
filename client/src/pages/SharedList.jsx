@@ -76,7 +76,7 @@ const SharedList = () => {
     if (error) return <div>Error :(</div>;
     // setListState(data.list);
     return (
-        <VStack>
+        <VStack h="100%">
             <Heading as='h2' size='2xl'>
                 <EditableText
                     text={data.list.name}

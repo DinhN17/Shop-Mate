@@ -46,6 +46,7 @@ const client = new ApolloClient({
 
 function App() {
   return (
+
     <ApolloProvider client={client}>
       <Box display="flex" flexDirection="column" minHeight="100vh">
         <Header />

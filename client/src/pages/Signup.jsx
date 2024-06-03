@@ -127,7 +127,7 @@ const Signup = () => {
                     )}
                 {error && (
                 <Text pt="5px">
-                {error.message}
+                Invalid username, password or email. Try again.
                 </Text>
                 )}
                 </CardBody>
