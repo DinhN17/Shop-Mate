@@ -4,6 +4,7 @@
 import React from 'react';
 // import './App.css'
 
+
 import {
   ApolloClient,
   InMemoryCache,
@@ -16,6 +17,7 @@ import { setContext } from '@apollo/client/link/context';
 import { Outlet } from 'react-router-dom';
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
+import { Box, Container } from '@chakra-ui/react';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -44,14 +46,15 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <ApolloProvider client={client} >
-      <>
+
+    <ApolloProvider client={client}>
+      <Box display="flex" flexDirection="column" minHeight="100vh">
         <Header />
-        <main>
+        <Container flex="1" maxW="container.xl" paddingY={4}>
           <Outlet />
-        </main>
+        </Container>
         <Footer />
-      </>
+      </Box>
     </ApolloProvider>
   )
 }
