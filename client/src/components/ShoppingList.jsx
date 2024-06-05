@@ -8,6 +8,8 @@ import ShareListButton from './ShareListButton';
 import AddingButton from "./AddingButton";
 import { useMutation } from '@apollo/client';
 
+import Auth from '../utils/auth';
+
 import { DELETE_LIST, DUPLICATE_LIST, ADD_LIST } from '../utils/mutations';
 import { GET_LISTS_BY_ME } from '../utils/queries';
 
@@ -96,6 +98,7 @@ export default function ShoppingList({lists}) {
                 >
                   Duplicate
                 </Button>
+                {(Auth.getUser().data.username != list.owner) ? null : (
                 <Button 
                   colorScheme="red" 
                   size="sm"
@@ -103,6 +106,7 @@ export default function ShoppingList({lists}) {
                 >
                   Delete
                 </Button>
+                )}
               </Stack>
             </Box>
           ))}
