@@ -91,7 +91,7 @@ const SharedList = () => {
                 handleSaveButton={handleUpdateListDescription}
                 handleSaveButtonProps={{listId: listId}}
             />
-            <ItemList items={data.list.items} listId={listId} />
+            <ItemList items={data.list.items} listId={listId} listOwner={data.list.owner} />
         </VStack>
     );
 };

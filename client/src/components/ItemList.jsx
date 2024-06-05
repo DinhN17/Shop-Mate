@@ -7,7 +7,7 @@ import Auth from '../utils/auth';
 import AddingButton from "../components/AddingButton";
 import EditableText from '../components/EditableText';
 
-const ItemsList = ({ items, listId }) => {
+const ItemsList = ({ items, listId, listOwner }) => {
   const [removeItem] = useMutation(REMOVE_ITEM, {
     refetchQueries: [{ query: GET_LIST, variables: { id: listId } }]
   });
@@ -121,6 +121,7 @@ const ItemsList = ({ items, listId }) => {
                 >
                   Buy
                 </Button>
+                {(Auth.getUser().data.username != listOwner) ? null : (
                 <Button 
                   colorScheme="red" 
                   size="sm"
@@ -128,6 +129,7 @@ const ItemsList = ({ items, listId }) => {
                 >
                   Remove
                 </Button>
+                )}
               </Stack>
             </Box>
           ))}
